@@ -10,13 +10,53 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\download.png" />
+    <None Remove="Resources\cloud-arrow-down-solid.png" />
+    <None Remove="Resources\Exit.png" />
+    <None Remove="Resources\folder-minus-solid.png" />
+    <None Remove="Resources\folder-open-regular.png" />
+    <None Remove="Resources\folder-plus-solid.png" />
+    <None Remove="Resources\gears-solid.png" />
+    <None Remove="Resources\maximize-solid.png" />
+    <None Remove="Resources\minus-solid.png" />
     <None Remove="Resources\person-through-window-solid.png" />
     <None Remove="Resources\person-through-window-solid.svg" />
+    <None Remove="Resources\play-solid.png" />
+    <None Remove="Resources\plus-solid.png" />
+    <None Remove="Resources\sliders-solid.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\download.png">
+    <Resource Include="Resources\cloud-arrow-down-solid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Exit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\folder-minus-solid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\folder-open-regular.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\folder-plus-solid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\gears-solid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\maximize-solid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\minus-solid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\play-solid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\plus-solid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\sliders-solid.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
