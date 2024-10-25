@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <RootNamespace>Labb_3_QuizDataBas</RootNamespace>
+    <RootNamespace>Labb_3_Quiz_Configurator</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
@@ -23,6 +23,10 @@
     <None Remove="Resources\play-solid.png" />
     <None Remove="Resources\plus-solid.png" />
     <None Remove="Resources\sliders-solid.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
   </ItemGroup>
 
   <ItemGroup>

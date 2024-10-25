@@ -15,15 +15,15 @@ using System.Windows.Shapes;
 
 namespace Labb_3_QuizDataBas.Views
 {
-    /// <summary>
-    /// Interaction logic for MenuView.xaml
-    /// </summary>
     public partial class MenuView : UserControl
     {
         public MenuView()
         {
-
             InitializeComponent();
         }
     }
 }
+
+    /// <summary>
+    /// Interaction logic for MenuView.xaml
+    /// </summary>
