@@ -13,7 +13,11 @@ namespace Labb_3_QuizDataBas.ViewModel
         {
             this.mainWindowViewModel = mainWindowViewModel;
         }
-   public QuestionPackViewModel? ActivePack { get => MainWindowViewModel.ActivePack; }
-    }
+   public QuestionPackViewModel? ActivePack { get => mainWindowViewModel.ActivePack; }
 
+
+
+
+
+    }
 }
