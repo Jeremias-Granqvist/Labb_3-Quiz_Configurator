@@ -1,10 +1,5 @@
 ﻿using Labb_3_QuizDataBas.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Labb_3_QuizDataBas.ViewModel
 {
@@ -28,9 +23,9 @@ namespace Labb_3_QuizDataBas.ViewModel
         }
         public MainWindowViewModel()
         {
+            ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
             PlayerViewModel = new PlayerViewModel(this);
             ConfigurationViewModel = new ConfigurationViewModel(this);
-            ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
         }
 
     }

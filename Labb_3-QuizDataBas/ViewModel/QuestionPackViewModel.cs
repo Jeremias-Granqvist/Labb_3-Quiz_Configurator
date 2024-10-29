@@ -1,12 +1,5 @@
 ﻿using Labb_3_QuizDataBas.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Labb_3_QuizDataBas.ViewModel
 {
@@ -16,6 +9,7 @@ namespace Labb_3_QuizDataBas.ViewModel
 
 
         public ObservableCollection<Question> Questions { get;}
+
         public string Name
         {
             get => model.Name;
@@ -25,7 +19,6 @@ namespace Labb_3_QuizDataBas.ViewModel
                 RaisePropertyChanged();
             }
         }
-        
         public Difficulty Difficulty 
         {
             get => model.Difficulty;
@@ -49,6 +42,5 @@ namespace Labb_3_QuizDataBas.ViewModel
             this.model = model;
             this.Questions = new ObservableCollection<Question>(model.Questions);
         }
-       
     }
 }

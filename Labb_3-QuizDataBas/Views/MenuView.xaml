@@ -8,317 +8,97 @@
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
-    
-    
+
+
     <!--Icon = "{fa:Icon namnpåknapppåFontAwesome}" för att byta ikon på knappar sen-->
     <Grid>
 
         <Menu>
             <MenuItem Header="_File">
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/folder-plus-solid.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="_New Question Pack"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="Gray"
-                                       Text="CTRL + N"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Right" />
+                <MenuItem Header="_New Question Pack"
+                          Icon="{fa:Icon folderPlus}" />
 
-                        </Grid>
-                    </MenuItem.Header>
+                <MenuItem Header="_Select Question Pack"
+                          Icon="{fa:Icon folderOpen}">
+                    <MenuItem.ItemsSource>
+                        <Binding Path="Packs" />
+                    </MenuItem.ItemsSource>
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Header"
+                                    Value="{Binding Name}" />
+                            <Setter Property="Command"
+                                    Value="{Binding DataContet.SetActivePackCommand, 
+                                                    RelativeSource={RelativeSource 
+                                                    AncestorType=Window}}" />
+                            <Setter Property="CommandParameter"
+                                    Value="{Binding}" />
+                        </Style>
+                               
+                    </MenuItem.ItemContainerStyle>
                 </MenuItem>
 
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/folder-open-regular.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="Select Question Pack"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="Gray"
-                                       Text="-"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Right" />
-
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>
-
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/folder-minus-solid.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="Delete Question Pack"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="Gray"
-                                       Text="- + -"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Right" />
-
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>
-
+                <MenuItem Header="Delete Question Pack"
+                          Icon="{fa:Icon folderMinus}" />
 
                 <Separator />
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/cloud-arrow-down-solid.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="Import Questions"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="Gray"
-                                       Text="-"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Right" />
 
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>
+                <MenuItem Header="_Import Questions"
+                          Icon="{fa:Icon cloudArrowDown}" />
                 <Separator />
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/Exit.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="Exit"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="Gray"
-                                       Text="ALT+F4"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Right" />
 
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>
+                <MenuItem Header="E_xit"
+                          Icon="{fa:Icon doorOpen}" />
+
             </MenuItem>
+            <!--<MenuItem>
+                            <MenuItem Header="_Select Question Pack">
+                                Icon="{fa:Icon FolderOpen}" 
+                                
+                                
+                                <MenuItem.ItemsSource>
+                                    <Binding Path="Packs" />
+                                </MenuItem.ItemsSource>
+                                <MenuItem.ItemContainerStyle>
+                                    <Style TargetType="MenuItem">
+                                        <Setter Property="Header"
+                                                Value="{Binding Name}" />
+                                        <Setter Property="Command"
+                                                Value="{Binding DataContext.SetActivePackCommand, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                        <Setter Property="CommandParameter"
+                                                Value="{Binding}" />
+                                    </Style>
+                                </MenuItem.ItemContainerStyle>
+                            </MenuItem>
+
+                        </Grid>
+                    </MenuItem.Header>
+                </MenuItem>-->
+
+
+
             <MenuItem Header="_Edit">
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/plus-solid.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="Add Question"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="Gray"
-                                       Text="ALT+F4"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Right" />
+                <MenuItem Header="Add Question"
+                          Icon="{fa:Icon plus}" />
 
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>
+                <MenuItem Header="Remove Question"
+                          Icon="{fa:Icon minus}" />
 
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/minus-solid.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="Remove Question"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="Gray"
-                                       Text="ALT+F4"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Right" />
-
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>
-
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/sliders-solid.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="Pack Options"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="Gray"
-                                       Text="ALT+F4"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Right" />
-
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>
+                <MenuItem Header="Pack Options"
+                          Icon="{fa:Icon sliders}" />
             </MenuItem>
 
             <MenuItem Header="View">
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/play-solid.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="Play"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="Gray"
-                                       Text="ALT+F4"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Right" />
-
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>
-
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/gears-solid.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="Edit"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="Gray"
-                                       Text="ALT+F4"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Right" />
-
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>
+                <MenuItem Header="Play"
+                          Icon="{fa:Icon play}" />
+                <MenuItem Header="Édit"
+                          Icon="{fa:Icon gears}" />
 
                 <Separator />
-                <MenuItem>
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/maximize-solid.png"
-                               Width="16"
-                               Height="16" />
-                    </MenuItem.Icon>
-                    <MenuItem.Header>
-                        <Grid HorizontalAlignment="Stretch">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0"
-                                       Foreground="black"
-                                       Text="Fullscreen"
-                                       TextAlignment="Left"
-                                       VerticalAlignment="Stretch"
-                                       HorizontalAlignment="Left" />
-                            <TextBlock Grid.Column="2"
-                                       Foreground="Gray"
-                                       Text="TEST"
-                                       HorizontalAlignment="Stretch"
-                                       Margin="5,0,0,0" />
-
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>
+                <MenuItem Header="Fullscreen"
+                          Icon="{fa:Icon expand}" />
             </MenuItem>
+
         </Menu>
         <!--
         MainWindow.xaml kommer i princip bestå av ovanstående kontroller på såvis att MenuView alltid kommer visas högst upp, 
