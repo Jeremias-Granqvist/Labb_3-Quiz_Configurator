@@ -43,3 +43,11 @@ Views: Bind to their corresponding ViewModels.
 Commands: Use DelegateCommand to handle user actions.
 Dialogs: Manage user input for creating packs and options.
 If you have specific parts of the implementation you want to delve into, let me know!
+
+
+### Personal notes ### 
+när man trycker på "add question" så skapas ett nytt ListboxLtem, som har en Titel som är "Question:" följt av frågan som tas direkt av QuestionTB. 
+om man inte fyller i någon fråga eller svar, sparas fortfarande frågan och man kan köra med tomma frågor. (**frågan sparas direkt, sen får vi uppdatera med propertychange när man fyller i?**)
+
+när man skapar en ny QuestionPack är den tom, sen får man fylla på med frågor själv allt eftersom. 
+
