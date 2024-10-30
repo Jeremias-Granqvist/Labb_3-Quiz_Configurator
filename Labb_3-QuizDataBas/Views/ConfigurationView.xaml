@@ -54,7 +54,8 @@
                 Width="20"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
-                Margin="360,0,0,0">
+                Margin="360,0,0,0"
+                Command="{Binding PackOptionsCommand}">
             <Image Source="/Resources/sliders-solid.png" />
         </Button>
 

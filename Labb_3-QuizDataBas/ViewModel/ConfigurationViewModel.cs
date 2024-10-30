@@ -1,4 +1,5 @@
 ﻿using Labb_3_QuizDataBas.Command;
+using Labb_3_QuizDataBas.Dialogs;
 using Labb_3_QuizDataBas.Model;
 using System.Windows;
 using System.Windows.Input;
@@ -16,10 +17,12 @@ namespace Labb_3_QuizDataBas.ViewModel
             SelectedItem = ActivePack.Questions.FirstOrDefault();
             AddQuestionCommand = new DelegateCommand(OnAddQuestion);
             RemoveQuestionCommand = new DelegateCommand(OnRemoveQuestion);
+            PackOptionsCommand = new DelegateCommand(OnPackOptions);
         }
 
         public ICommand AddQuestionCommand { get; }
         public ICommand RemoveQuestionCommand { get; }
+        public ICommand PackOptionsCommand { get; }
         private void OnAddQuestion(object parameter)
         {
             ActivePack.Questions.Add(new Question());
@@ -32,6 +35,11 @@ namespace Labb_3_QuizDataBas.ViewModel
                 ActivePack.Questions.Remove(SelectedItem);
                 RaisePropertyChanged();
             }
+        }
+
+        private void OnPackOptions(object parameter)
+        {
+            PackOptionsDialog packOptions = new PackOptionsDialog();
         }
 
 
@@ -95,8 +103,7 @@ namespace Labb_3_QuizDataBas.ViewModel
             set
             {
                 SelectedItem.IncorrectAnswers[0] = value;
-                RaisePropertyChanged(SelectedItem.IncorrectAnswers[0]);
-                RaisePropertyChanged(IncorrectAnswer1);
+                RaisePropertyChanged();
 
             }
         }

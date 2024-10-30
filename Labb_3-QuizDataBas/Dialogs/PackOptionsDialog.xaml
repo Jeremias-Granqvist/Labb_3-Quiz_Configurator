@@ -6,10 +6,9 @@
         xmlns:local="clr-namespace:Labb_3_QuizDataBas.Dialogs"
         mc:Ignorable="d"
         Title="Pack Options"
-        SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterScreen"
-        d:DesignHeight="180"
-        d:DesignWidth="200">
+        Width="200"
+        Height="250"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -26,22 +25,28 @@
                Grid.Row="1" />
         <Label Content="Time Limit:"
                FontWeight="Bold"
-               VerticalAlignment="top"
+               VerticalAlignment="Top"
                HorizontalAlignment="Left"
-               Grid.Row="2" />
+               Grid.Row="2"
+               Margin="0,4,0,0" />
 
         <TextBox x:Name="QuestionPackNameTB"
                  Text="{Binding Name, Mode=TwoWay}"
-                 Grid.Row="0"
                  Height="25"
                  Width="Auto"
-                 VerticalAlignment="Bottom" />
+                 VerticalAlignment="Top"
+                 BorderThickness="5"
+                 BorderBrush="White"
+                 Margin="0,31,0,0" />
 
         <ComboBox x:Name="DifficultyCB"
                   Height="25"
                   Width="Auto"
-                  VerticalAlignment="Bottom"
-                  Grid.Row="1">
+                  VerticalAlignment="Top"
+                  BorderThickness="5"
+                  BorderBrush="White"
+                  Grid.Row="1"
+                  Margin="0,31,0,0">
             <ComboBoxItem Content="Easy" />
             <ComboBoxItem Content="Medium" />
             <ComboBoxItem Content="Hard" />
@@ -53,27 +58,29 @@
                  Width="53"
                  HorizontalContentAlignment="Right"
                  Text="{Binding Path=Value, ElementName=TimeLimitSlider, Mode=TwoWay}"
-                 Grid.Row="1"
-                 Margin="77,54,0,0"
-                 Grid.RowSpan="2" />
+                 Grid.Row="2"
+                 Margin="82,5,0,0" />
 
-        <TextBox VerticalAlignment="top"
+        <TextBox VerticalAlignment="Top"
                  HorizontalAlignment="Right"
                  Height="25"
                  Width="65"
                  HorizontalContentAlignment="Left"
                  Text="Seconds"
-                 Grid.Row="2" />
+                 Grid.Row="2"
+                 Margin="0,5,0,0" />
 
         <Slider x:Name="TimeLimitSlider"
-                Maximum="30"
+                Maximum="120"
                 Minimum="5"
                 TickFrequency="5"
                 IsSnapToTickEnabled="True"
                 TickPlacement="BottomRight"
                 Grid.Row="2"
                 Value="{Binding TimeLimitInSeconds, Mode=TwoWay}"
-                VerticalAlignment="Bottom" />
+                VerticalAlignment="Top"
+                BorderThickness="5"
+                Margin="0,44,0,0" />
 
 
     </Grid>
