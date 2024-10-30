@@ -88,7 +88,7 @@
                Grid.Column="1" />
         <TextBox x:Name="IncorrectAnswer1TB"
                  TextWrapping="Wrap"
-                 Text="{Binding IncorrectAnswer1, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding SelectedItem.IncorrectAnswers[0], UpdateSourceTrigger=PropertyChanged}"
                  Grid.Column="1"
                  Height="22"
                  Margin="22,185,22,-156"
@@ -110,7 +110,7 @@
                Grid.Column="1" />
         <TextBox x:Name="IncorrectAnswer3TB"
                  TextWrapping="Wrap"
-                 Text="{Binding IncorrectAnswer3, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding SelectedItem.IncorrectAnswers[2], UpdateSourceTrigger=PropertyChanged}"
                  Grid.Column="1"
                  Height="22"
                  Margin="22,305,22,-276"

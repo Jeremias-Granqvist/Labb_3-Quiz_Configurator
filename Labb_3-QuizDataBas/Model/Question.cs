@@ -12,7 +12,7 @@ namespace Labb_3_QuizDataBas.Model
         
         public string Query { get; set; }
         public string CorrectAnswer { get; set; }
-        public string[] IncorrectAnswers = new string[3];
+        public string[] IncorrectAnswers { get; set; } = new string[3];
 
 
         public Question()
