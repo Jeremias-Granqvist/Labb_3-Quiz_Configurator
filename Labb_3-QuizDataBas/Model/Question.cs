@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Labb_3_QuizDataBas.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,16 @@ namespace Labb_3_QuizDataBas.Model
 {
     internal class Question
     {
-
+        
         public string Query { get; set; }
         public string CorrectAnswer { get; set; }
-        public string[] IncorrectAnswers { get; set; }
+        public string[] IncorrectAnswers = new string[3];
+
+
+        public Question()
+        {
+            
+        }
 
         public Question(string query, string correctAnswer, 
             string incorrectAnswer1, string incorrectAnswer2, string incorrectAnswer3)
@@ -21,5 +28,15 @@ namespace Labb_3_QuizDataBas.Model
             IncorrectAnswers = new string[3] { incorrectAnswer1, incorrectAnswer2, incorrectAnswer3 };
         }
 
+        public override string ToString()
+        {
+            return "";
+        }
+        //public void AddQuestion(string query, string correctAnswer,
+        //    string incorrectAnswer1, string incorrectAnswer2, string incorrectAnswer3)
+        //{
+        //    Question newQuestion = new Question(query, correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3);
+
+        //}
     }
 }

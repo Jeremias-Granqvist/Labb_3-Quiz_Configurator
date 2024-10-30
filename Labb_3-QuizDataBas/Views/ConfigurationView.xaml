@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             DataContext="Binding PlayerViewModel"
+             DataContext="{Binding ConfigurationViewModel}"
              xmlns:local="clr-namespace:Labb_3_QuizDataBas.Views"
              mc:Ignorable="d"
              d:DesignHeight="450"
@@ -35,7 +35,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
                 Margin="270,0,0,0"
-                Command="">
+                Command="{Binding AddQuestionCommand}">
             <Image Source="/Resources/plus-solid.png" />
         </Button>
         <Button Name="RemoveQuestionButton"
@@ -44,7 +44,8 @@
                 Width="20"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
-                Margin="315,0,0,0">
+                Margin="315,0,0,0"
+                Command="{Binding RemoveQuestionCommand}">
             <Image Source="/Resources/minus-solid.png" />
         </Button>
         <Button Name="PackSettings"
@@ -64,7 +65,7 @@
                Grid.RowSpan="2" />
         <TextBox x:Name="QuestionTB"
                  TextWrapping="Wrap"
-                 Text="{Binding Path=query, Mode=OneWay}"
+                 Text="{Binding SelectedItem.Query,UpdateSourceTrigger=PropertyChanged}"
                  Grid.Column="1"
                  Margin="22,10,22,-32"
                  Grid.Row="1" />
@@ -75,7 +76,7 @@
                Grid.Column="1" />
         <TextBox x:Name="CorrectAnswerTB"
                  TextWrapping="Wrap"
-                 Text="{Binding Path=correctAnswer, Mode=TwoWay}"
+                 Text="{Binding SelectedItem.CorrectAnswer, UpdateSourceTrigger=PropertyChanged}"
                  Grid.Column="1"
                  Height="22"
                  Margin="22,130,22,-101"
@@ -87,7 +88,7 @@
                Grid.Column="1" />
         <TextBox x:Name="IncorrectAnswer1TB"
                  TextWrapping="Wrap"
-                 Text="{Binding Path= incorrectAnswer1, Mode=TwoWay}"
+                 Text="{Binding IncorrectAnswer1, UpdateSourceTrigger=PropertyChanged}"
                  Grid.Column="1"
                  Height="22"
                  Margin="22,185,22,-156"
@@ -98,7 +99,7 @@
                Grid.Column="1" />
         <TextBox x:Name="IncorrectAnswer2TB"
                  TextWrapping="Wrap"
-                 Text="{Binding Path= incorrectAnswer2, Mode=TwoWay}"
+                 Text="{Binding SelectedItem.IncorrectAnswers[1], UpdateSourceTrigger=PropertyChanged}"
                  Grid.Column="1"
                  Height="22"
                  Margin="22,245,22,-216"
@@ -109,17 +110,27 @@
                Grid.Column="1" />
         <TextBox x:Name="IncorrectAnswer3TB"
                  TextWrapping="Wrap"
-                 Text="{Binding Path=incorrectAnswer3, Mode=TwoWay}"
+                 Text="{Binding IncorrectAnswer3, UpdateSourceTrigger=PropertyChanged}"
                  Grid.Column="1"
                  Height="22"
                  Margin="22,305,22,-276"
                  Grid.Row="1" />
 
 
-        <ListBox Grid.Row="1"
+        <ListBox x:Name="questionsLB"
+                 SelectedItem="{Binding SelectedItem}"
+                 ItemsSource="{Binding ActivePack.Questions}"
+                 Grid.Row="1"
                  Margin="10,10,10,-297">
-            <ListBoxItem Content="{Binding ElementName=QuestionTB, Path=Text, Mode=TwoWay}" />
-
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="Question:"
+                                   FontWeight="Bold" />
+                        <TextBlock Text="{Binding Query}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
 
 

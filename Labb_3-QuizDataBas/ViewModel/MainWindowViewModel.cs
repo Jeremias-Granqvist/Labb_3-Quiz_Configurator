@@ -1,5 +1,7 @@
-﻿using Labb_3_QuizDataBas.Model;
+﻿using Labb_3_QuizDataBas.Command;
+using Labb_3_QuizDataBas.Model;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Labb_3_QuizDataBas.ViewModel
 {
@@ -9,7 +11,9 @@ namespace Labb_3_QuizDataBas.ViewModel
         public ConfigurationViewModel ConfigurationViewModel { get; }
         public PlayerViewModel PlayerViewModel{ get; }
 
+
         private QuestionPackViewModel? _activePack;
+        
         public QuestionPackViewModel? ActivePack
         {
             get => _activePack;
@@ -17,16 +21,23 @@ namespace Labb_3_QuizDataBas.ViewModel
             {
                 _activePack = value;
                 RaisePropertyChanged();
-                ConfigurationViewModel.RaisePropertyChanged("ActivePack");
+                //ConfigurationViewModel.RaisePropertyChanged("ActivePack");
 
             }
         }
         public MainWindowViewModel()
         {
+            Packs = new ObservableCollection<QuestionPackViewModel>();
             ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
-            PlayerViewModel = new PlayerViewModel(this);
             ConfigurationViewModel = new ConfigurationViewModel(this);
+            Packs.Add(ActivePack);
+            PlayerViewModel = new PlayerViewModel(this);
+
         }
 
+        private void AddQuestion(object parameter)
+        {
+            var newQuestion = new Question();
+        }
     }
 }
