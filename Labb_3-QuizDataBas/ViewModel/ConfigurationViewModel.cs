@@ -125,11 +125,7 @@ namespace Labb_3_QuizDataBas.ViewModel
 
             }
         }
-        private void AddButton(object obj)
-        {
-            ActivePack.Questions.Add(new Question());
-            SelectedItem = ActivePack.Questions.LastOrDefault();
-        }
+        
 
 
     }
