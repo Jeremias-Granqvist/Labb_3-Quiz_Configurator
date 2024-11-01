@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Labb_3_QuizDataBas.ViewModel
 {
-    internal class QuestionPackViewModel : ViewModelBase
+    public class QuestionPackViewModel : ViewModelBase
     {
         private readonly QuestionPack model;
 
@@ -37,6 +37,9 @@ namespace Labb_3_QuizDataBas.ViewModel
                 RaisePropertyChanged();
             }
         }
+
+        public QuestionPack Model => model;
+
         public QuestionPackViewModel(QuestionPack model)
         {
             this.model = model;

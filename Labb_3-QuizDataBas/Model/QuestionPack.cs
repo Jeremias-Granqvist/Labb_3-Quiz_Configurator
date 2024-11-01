@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Labb_3_QuizDataBas.Model
 {
 
-    enum Difficulty { Easy, Medium, Hard}
-    internal class QuestionPack
+    public enum Difficulty { Easy, Medium, Hard}
+    public partial class QuestionPack
     {
         public string Name { get; set; }
         public Difficulty Difficulty { get; set; }

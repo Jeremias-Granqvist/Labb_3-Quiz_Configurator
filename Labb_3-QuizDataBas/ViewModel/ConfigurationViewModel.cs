@@ -12,17 +12,20 @@ namespace Labb_3_QuizDataBas.ViewModel
         public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel)
         {
             this.mainWindowViewModel = mainWindowViewModel;
-
+            if (mainWindowViewModel != null)
+            {
+                ActivePack = mainWindowViewModel.ActivePack;
+            }
             ActivePack.Questions.Add(new Question());
             SelectedItem = ActivePack.Questions.FirstOrDefault();
             AddQuestionCommand = new DelegateCommand(OnAddQuestion);
             RemoveQuestionCommand = new DelegateCommand(OnRemoveQuestion);
-            PackOptionsCommand = new DelegateCommand(OnPackOptions);
+         
         }
 
         public ICommand AddQuestionCommand { get; }
         public ICommand RemoveQuestionCommand { get; }
-        public ICommand PackOptionsCommand { get; }
+
         private void OnAddQuestion(object parameter)
         {
             ActivePack.Questions.Add(new Question());
@@ -37,13 +40,33 @@ namespace Labb_3_QuizDataBas.ViewModel
             }
         }
 
-        private void OnPackOptions(object parameter)
+       
+
+
+        private QuestionPackViewModel? _mainWindowViewModel;
+        //public QuestionPackViewModel? ActivePack { get => mainWindowViewModel?.ActivePack; }
+
+
+        public string ActivePackName => ActivePack?.Name ?? "No Pack Selected";
+
+
+        private QuestionPackViewModel? _activepack;
+
+        public QuestionPackViewModel? ActivePack
         {
-            PackOptionsDialog packOptions = new PackOptionsDialog();
+            get => _activepack;
+            set
+            {
+                if (_activepack != value)
+                {
+                    _activepack = value;
+                RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(ActivePackName));
+                }
+ 
+            }
         }
 
-
-        public QuestionPackViewModel? ActivePack { get => mainWindowViewModel?.ActivePack; }
 
 
         private Question? _selectedItem;

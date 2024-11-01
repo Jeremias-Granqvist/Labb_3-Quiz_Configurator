@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:Labb_3_QuizDataBas.Dialogs"
         mc:Ignorable="d"
         Title="Pack Options"
-        Width="200"
-        Height="250"
-        WindowStartupLocation="CenterScreen">
+        Width="250"
+        Height="300"
+        WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -18,54 +19,61 @@
         <Label Content="Pack Name:"
                FontWeight="Bold"
                VerticalAlignment="Top"
-               Grid.Row="0" />
+               Grid.Row="0"
+               Height="26" />
         <Label Content="Difficulty:"
                FontWeight="Bold"
-               VerticalAlignment="top"
-               Grid.Row="1" />
+               VerticalAlignment="Top"
+               Grid.Row="1"
+               Height="26"
+               Margin="0,9,0,0" />
         <Label Content="Time Limit:"
                FontWeight="Bold"
                VerticalAlignment="Top"
                HorizontalAlignment="Left"
                Grid.Row="2"
-               Margin="0,4,0,0" />
+               Margin="0,4,0,0"
+               Width="104"
+               Height="26" />
 
         <TextBox x:Name="QuestionPackNameTB"
-                 Text="{Binding Name, Mode=TwoWay}"
+                 Text="{Binding Name}"
                  Height="25"
                  Width="Auto"
                  VerticalAlignment="Top"
-                 BorderThickness="5"
-                 BorderBrush="White"
-                 Margin="0,31,0,0" />
+                 Margin="5,31,5,0" />
 
         <ComboBox x:Name="DifficultyCB"
                   Height="25"
                   Width="Auto"
                   VerticalAlignment="Top"
-                  BorderThickness="5"
-                  BorderBrush="White"
                   Grid.Row="1"
-                  Margin="0,31,0,0">
-            <ComboBoxItem Content="Easy" />
-            <ComboBoxItem Content="Medium" />
-            <ComboBoxItem Content="Hard" />
+                  Margin="5,40,5,0"
+                  SelectedItem="{Binding Difficulty, Mode=TwoWay}"
+                  RenderTransformOrigin="0.5,0.563">
+            <ComboBoxItem Content="Easy" Tag="0" />
+            <ComboBoxItem Content="Medium" Tag="1" />
+            <ComboBoxItem Content="Hard" Tag="2"/>
         </ComboBox>
         <TextBox x:Name="TimeLimitLabel"
                  VerticalAlignment="Top"
                  HorizontalAlignment="Left"
                  Height="25"
-                 Width="53"
+                 Width="54"
+                 BorderThickness="0"
                  HorizontalContentAlignment="Right"
+                 VerticalContentAlignment="Center"
                  Text="{Binding Path=Value, ElementName=TimeLimitSlider, Mode=TwoWay}"
                  Grid.Row="2"
-                 Margin="82,5,0,0" />
+                 Margin="109,5,0,0" />
 
         <TextBox VerticalAlignment="Top"
                  HorizontalAlignment="Right"
                  Height="25"
                  Width="65"
+                 BorderThickness="0"
                  HorizontalContentAlignment="Left"
+                 VerticalContentAlignment="Center"
                  Text="Seconds"
                  Grid.Row="2"
                  Margin="0,5,0,0" />
@@ -80,8 +88,29 @@
                 Value="{Binding TimeLimitInSeconds, Mode=TwoWay}"
                 VerticalAlignment="Top"
                 BorderThickness="5"
-                Margin="0,44,0,0" />
-
-
+                Margin="5,35,5,0"
+                Height="34" />
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="SaveSettingsBTN"
+                    Content="Save"
+                    Height="25"
+                    Width="50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="50,0,0,0" 
+                    Click="SaveSettingsBTN_Click"/>
+            
+            <Button x:Name="CancelChangesBTN"
+                    Content="Cancel"
+                    Height="25"
+                    Width="50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="150,0,0,0" 
+                    Click="CancelChangesBTN_Click"/>
+        </Grid>
     </Grid>
 </Window>

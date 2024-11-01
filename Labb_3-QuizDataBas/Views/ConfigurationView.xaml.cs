@@ -1,29 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Labb_3_QuizDataBas.Dialogs;
+using Labb_3_QuizDataBas.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace Labb_3_QuizDataBas.Views
 {
     /// <summary>
     /// Interaction logic for ConfigurationView.xaml
     /// </summary>
-    public partial class ConfigurationView : UserControl
+    public partial class ConfigurationView : System.Windows.Controls.UserControl
     {
-        public ConfigurationView()
+        public ConfigurationView(MainWindowViewModel mainWindowViewModel)
         {
             InitializeComponent();
+            this.DataContext = new ConfigurationViewModel(mainWindowViewModel);
+
         }
 
+        private void PackSettings_Click(object sender, RoutedEventArgs e)
+        {
+
+            var viewModel = this.DataContext as ConfigurationViewModel;
+            if (viewModel != null && viewModel.ActivePack != null)
+            {
+                var settingsDialog = new PackOptionsDialog(viewModel.ActivePack); 
+                if (settingsDialog.ShowDialog() == true)
+                {
+
+                }
+            }
+        }
     }
 }

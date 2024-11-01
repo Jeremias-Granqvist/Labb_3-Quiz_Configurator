@@ -1,5 +1,6 @@
 ﻿using Labb_3_QuizDataBas.Command;
 using Labb_3_QuizDataBas.Model;
+using Labb_3_QuizDataBas.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -32,6 +33,7 @@ namespace Labb_3_QuizDataBas.ViewModel
             ConfigurationViewModel = new ConfigurationViewModel(this);
             Packs.Add(ActivePack);
             PlayerViewModel = new PlayerViewModel(this);
+            
 
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Labb_3_QuizDataBas.Model;
+using Labb_3_QuizDataBas.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,25 @@ namespace Labb_3_QuizDataBas.Dialogs
     /// </summary>
     public partial class PackOptionsDialog : Window
     {
-        public PackOptionsDialog()
+        public QuestionPackViewModel PackViewModel { get; private set; }
+
+        public PackOptionsDialog(QuestionPackViewModel packViewModel)
         {
             InitializeComponent();
+            PackViewModel = packViewModel;
+            DataContext = PackViewModel;
+        }
+
+        private void CancelChangesBTN_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
+        }
+
+        private void SaveSettingsBTN_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            Close();
         }
     }
 }
