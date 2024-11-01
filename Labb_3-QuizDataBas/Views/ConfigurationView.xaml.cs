@@ -15,7 +15,7 @@ namespace Labb_3_QuizDataBas.Views
         {
             InitializeComponent();
             this.DataContext = new ConfigurationViewModel(mainWindowViewModel);
-
+            //Björn, här händer saker och jag vet inte vad
         }
 
         private void PackSettings_Click(object sender, RoutedEventArgs e)

@@ -41,7 +41,7 @@ namespace Labb_3_QuizDataBas.ViewModel
         }
 
        
-
+        //Björn härifrån och nedåt händer mer saker som jag inte riktigt förstår vad dom gör
 
         private QuestionPackViewModel? _mainWindowViewModel;
         //public QuestionPackViewModel? ActivePack { get => mainWindowViewModel?.ActivePack; }
@@ -67,7 +67,7 @@ namespace Labb_3_QuizDataBas.ViewModel
             }
         }
 
-
+        //Björn, Till hit fattar jag inte jättemycket vad saker fyller för funktion!
 
         private Question? _selectedItem;
 

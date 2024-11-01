@@ -19,6 +19,8 @@
             <RowDefinition Height="Auto"
                            MinHeight="40" />
         </Grid.RowDefinitions>
+        
+        <!--Björn, här är min label!-->
         <Label Content="{Binding ActivePackName}"
                HorizontalAlignment="Left"
                Margin="10,0,0,0"

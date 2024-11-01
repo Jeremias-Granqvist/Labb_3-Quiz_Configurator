@@ -35,7 +35,7 @@
                Margin="0,4,0,0"
                Width="104"
                Height="26" />
-
+        <!-- Björn, jag vill att QuestionPackNameTB kan ändra namnet på en label i ConfigurationView.Xaml-->
         <TextBox x:Name="QuestionPackNameTB"
                  Text="{Binding Name}"
                  Height="25"
