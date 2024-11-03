@@ -1,26 +1,34 @@
-﻿using Labb_3_QuizDataBas.Command;
-using Labb_3_QuizDataBas.Dialogs;
+﻿using Labb_3_Quiz_Configurator.Model;
+using Labb_3_QuizDataBas.Command;
 using Labb_3_QuizDataBas.Model;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Labb_3_QuizDataBas.ViewModel
 {
-    internal class ConfigurationViewModel : ViewModelBase
+    public class ConfigurationViewModel : ViewModelBase
     {
         private readonly MainWindowViewModel? mainWindowViewModel;
+
+        private QuestionPackViewModel? _mainWindowViewModel;
+
         public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel)
         {
             this.mainWindowViewModel = mainWindowViewModel;
             if (mainWindowViewModel != null)
             {
                 ActivePack = mainWindowViewModel.ActivePack;
+
             }
             ActivePack.Questions.Add(new Question());
             SelectedItem = ActivePack.Questions.FirstOrDefault();
+          
+            PackHolder.ActivePack = ActivePack.Model;
+
             AddQuestionCommand = new DelegateCommand(OnAddQuestion);
             RemoveQuestionCommand = new DelegateCommand(OnRemoveQuestion);
-         
+
         }
 
         public ICommand AddQuestionCommand { get; }
@@ -40,15 +48,19 @@ namespace Labb_3_QuizDataBas.ViewModel
             }
         }
 
-       
+
         //Björn härifrån och nedåt händer mer saker som jag inte riktigt förstår vad dom gör
 
-        private QuestionPackViewModel? _mainWindowViewModel;
-        //public QuestionPackViewModel? ActivePack { get => mainWindowViewModel?.ActivePack; }
-
+        //public QuestionPackViewModel? ActivePack { get => mainWindowViewModel?.ActivePack; 
 
         public string ActivePackName => ActivePack?.Name ?? "No Pack Selected";
-
+        private void ActivePack_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ActivePack.Name))
+            {
+                RaisePropertyChanged(nameof(ActivePackName));
+            }
+        }
 
         private QuestionPackViewModel? _activepack;
 
@@ -60,10 +72,9 @@ namespace Labb_3_QuizDataBas.ViewModel
                 if (_activepack != value)
                 {
                     _activepack = value;
-                RaisePropertyChanged();
+                    RaisePropertyChanged();
                     RaisePropertyChanged(nameof(ActivePackName));
                 }
- 
             }
         }
 
@@ -74,8 +85,8 @@ namespace Labb_3_QuizDataBas.ViewModel
         public Question? SelectedItem
         {
             get => _selectedItem;
-            set 
-            { 
+            set
+            {
                 _selectedItem = value;
                 RaisePropertyChanged();
             }
@@ -86,8 +97,8 @@ namespace Labb_3_QuizDataBas.ViewModel
         public Visibility visibility
         {
             get => _visibility;
-            set 
-            { 
+            set
+            {
                 _visibility = value;
                 RaisePropertyChanged();
             }
@@ -99,8 +110,8 @@ namespace Labb_3_QuizDataBas.ViewModel
         public string Query
         {
             get => SelectedItem?.Query;
-            set 
-            { 
+            set
+            {
                 SelectedItem.Query = value;
                 RaisePropertyChanged();
             }
@@ -111,7 +122,7 @@ namespace Labb_3_QuizDataBas.ViewModel
         public string CorrectAnswer
         {
             get => SelectedItem.CorrectAnswer;
-            set 
+            set
             {
                 SelectedItem.CorrectAnswer = value;
                 RaisePropertyChanged();
@@ -155,7 +166,7 @@ namespace Labb_3_QuizDataBas.ViewModel
 
             }
         }
-        
+
 
 
     }

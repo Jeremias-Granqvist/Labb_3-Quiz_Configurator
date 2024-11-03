@@ -1,4 +1,5 @@
-﻿using Labb_3_QuizDataBas.Command;
+﻿using Labb_3_Quiz_Configurator.Model;
+using Labb_3_QuizDataBas.Command;
 using Labb_3_QuizDataBas.Model;
 using Labb_3_QuizDataBas.Views;
 using System.Collections.ObjectModel;
@@ -6,7 +7,7 @@ using System.Windows.Input;
 
 namespace Labb_3_QuizDataBas.ViewModel
 {
-    internal class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase
     {
         public ObservableCollection<QuestionPackViewModel> Packs { get; set; }
         public ConfigurationViewModel ConfigurationViewModel { get; }

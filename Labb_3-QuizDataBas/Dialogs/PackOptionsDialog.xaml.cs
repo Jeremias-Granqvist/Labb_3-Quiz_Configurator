@@ -26,8 +26,7 @@ namespace Labb_3_QuizDataBas.Dialogs
         public PackOptionsDialog(QuestionPackViewModel packViewModel)
         {
             InitializeComponent();
-            PackViewModel = packViewModel;
-            DataContext = PackViewModel;
+            DataContext = packViewModel;
         }
 
         private void CancelChangesBTN_Click(object sender, RoutedEventArgs e)
@@ -38,8 +37,15 @@ namespace Labb_3_QuizDataBas.Dialogs
 
         private void SaveSettingsBTN_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
-            Close();
+
+            var viewModel = DataContext as QuestionPackViewModel;
+
+            if (viewModel != null)
+            {
+            this.DialogResult = true;
+            }
+            this.Close();
         }
     }
 }
+

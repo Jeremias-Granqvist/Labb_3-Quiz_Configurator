@@ -37,7 +37,7 @@
                Height="26" />
         <!-- Björn, jag vill att QuestionPackNameTB kan ändra namnet på en label i ConfigurationView.Xaml-->
         <TextBox x:Name="QuestionPackNameTB"
-                 Text="{Binding Name}"
+                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                  Height="25"
                  Width="Auto"
                  VerticalAlignment="Top"

@@ -5,8 +5,113 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3_QuizDataBas.Dialogs"
         mc:Ignorable="d"
+        Width="250"
+        Height="300"
         Title="CreateNewPackDialog" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Content="New Pack Name:"
+                   FontWeight="Bold"
+                   VerticalAlignment="Top"
+                   Grid.Row="0"
+                   Height="26" />
+            <Label Content="Difficulty:"
+                   FontWeight="Bold"
+                   VerticalAlignment="Top"
+                   Grid.Row="1"
+                   Height="26"
+                   Margin="0,9,0,0" />
+            <Label Content="Time Limit:"
+                   FontWeight="Bold"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Grid.Row="2"
+                   Margin="0,4,0,0"
+                   Width="104"
+                   Height="26" />
+            <TextBox x:Name="NewQuestionPackNameTB"
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                     Height="25"
+                     Width="Auto"
+                     VerticalAlignment="Top"
+                     Margin="5,31,5,0" />
+
+            <ComboBox x:Name="NewDifficultyCB"
+                      Height="25"
+                      Width="Auto"
+                      VerticalAlignment="Top"
+                      Grid.Row="1"
+                      Margin="5,40,5,0"
+                      SelectedItem="{Binding Difficulty, Mode=TwoWay}"
+                      RenderTransformOrigin="0.5,0.563">
+                <ComboBoxItem Content="Easy"
+                              Tag="0" />
+                <ComboBoxItem Content="Medium"
+                              Tag="1" />
+                <ComboBoxItem Content="Hard"
+                              Tag="2" />
+            </ComboBox>
+            <TextBox x:Name="NewTimeLimitLabel"
+                     VerticalAlignment="Top"
+                     HorizontalAlignment="Left"
+                     Height="25"
+                     Width="54"
+                     BorderThickness="0"
+                     HorizontalContentAlignment="Right"
+                     VerticalContentAlignment="Center"
+                     Text="{Binding Path=Value, ElementName=TimeLimitSlider, Mode=TwoWay}"
+                     Grid.Row="2"
+                     Margin="109,5,0,0" />
+
+            <TextBox VerticalAlignment="Top"
+                     HorizontalAlignment="Right"
+                     Height="25"
+                     Width="65"
+                     BorderThickness="0"
+                     HorizontalContentAlignment="Left"
+                     VerticalContentAlignment="Center"
+                     Text="Seconds"
+                     Grid.Row="2"
+                     Margin="0,5,0,0" />
+
+            <Slider x:Name="NewTimeLimitSlider"
+                    Maximum="120"
+                    Minimum="5"
+                    TickFrequency="5"
+                    IsSnapToTickEnabled="True"
+                    TickPlacement="BottomRight"
+                    Grid.Row="2"
+                    Value="{Binding TimeLimitInSeconds, Mode=TwoWay}"
+                    VerticalAlignment="Top"
+                    BorderThickness="5"
+                    Margin="5,35,5,0"
+                    Height="34" />
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="CreatePackBTN"
+                    Content="Create Pack"
+                    Height="25"
+                    Width="Auto"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="50,0,0,0"
+                    Click="CreatePackBTN_Click"/>
+
+            <Button x:Name="CancelBTN"
+                    Content="Cancel"
+                    Height="25"
+                    Width="50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="150,0,0,0"
+                    Click="CancelBTN_Click" />
+        </Grid>
     </Grid>
 </Window>

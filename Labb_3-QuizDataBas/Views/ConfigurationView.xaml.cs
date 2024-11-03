@@ -1,4 +1,5 @@
-﻿using Labb_3_QuizDataBas.Dialogs;
+﻿using Labb_3_Quiz_Configurator.Model;
+using Labb_3_QuizDataBas.Dialogs;
 using Labb_3_QuizDataBas.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,11 +12,13 @@ namespace Labb_3_QuizDataBas.Views
     /// </summary>
     public partial class ConfigurationView : System.Windows.Controls.UserControl
     {
+        public ConfigurationView()
+        {            
+            InitializeComponent();
+        }
         public ConfigurationView(MainWindowViewModel mainWindowViewModel)
         {
             InitializeComponent();
-            this.DataContext = new ConfigurationViewModel(mainWindowViewModel);
-            //Björn, här händer saker och jag vet inte vad
         }
 
         private void PackSettings_Click(object sender, RoutedEventArgs e)
@@ -24,7 +27,7 @@ namespace Labb_3_QuizDataBas.Views
             var viewModel = this.DataContext as ConfigurationViewModel;
             if (viewModel != null && viewModel.ActivePack != null)
             {
-                var settingsDialog = new PackOptionsDialog(viewModel.ActivePack); 
+                var settingsDialog = new PackOptionsDialog(new QuestionPackViewModel(PackHolder.ActivePack));
                 if (settingsDialog.ShowDialog() == true)
                 {
 

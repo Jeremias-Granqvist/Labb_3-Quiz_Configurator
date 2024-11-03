@@ -43,7 +43,7 @@ namespace Labb_3_QuizDataBas.ViewModel
         public QuestionPackViewModel(QuestionPack model)
         {
             this.model = model;
-            this.Questions = new ObservableCollection<Question>(model.Questions);
+            this.Questions = new ObservableCollection<Question>(model.Questions ?? Enumerable.Empty<Question>());
         }
     }
 }

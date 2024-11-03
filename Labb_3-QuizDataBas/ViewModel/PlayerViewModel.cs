@@ -3,7 +3,7 @@ using System.Windows.Threading;
 
 namespace Labb_3_QuizDataBas.ViewModel
 {
-    internal class PlayerViewModel : ViewModelBase
+    public class PlayerViewModel : ViewModelBase
     {
         private readonly MainWindowViewModel? mainWindowViewModel;
        

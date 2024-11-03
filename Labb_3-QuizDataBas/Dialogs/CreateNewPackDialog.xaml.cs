@@ -23,5 +23,15 @@ namespace Labb_3_QuizDataBas.Dialogs
         {
             InitializeComponent();
         }
+
+        private void CreatePackBTN_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CancelBTN_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
