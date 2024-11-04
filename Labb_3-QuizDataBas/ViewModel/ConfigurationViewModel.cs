@@ -1,5 +1,5 @@
-﻿using Labb_3_Quiz_Configurator.Model;
-using Labb_3_QuizDataBas.Command;
+﻿using Labb_3_QuizDataBas.Command;
+using Labb_3_QuizDataBas.Dialogs;
 using Labb_3_QuizDataBas.Model;
 using System.ComponentModel;
 using System.Windows;
@@ -16,23 +16,22 @@ namespace Labb_3_QuizDataBas.ViewModel
         public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel)
         {
             this.mainWindowViewModel = mainWindowViewModel;
-            if (mainWindowViewModel != null)
-            {
-                ActivePack = mainWindowViewModel.ActivePack;
 
-            }
-            ActivePack.Questions.Add(new Question());
-            SelectedItem = ActivePack.Questions.FirstOrDefault();
-          
-            PackHolder.ActivePack = ActivePack.Model;
+  //          ActivePack.Questions.Add(new Question());
+           SelectedItem = ActivePack?.Questions.FirstOrDefault();
+
+            //flytta till mainwindow? 
 
             AddQuestionCommand = new DelegateCommand(OnAddQuestion);
             RemoveQuestionCommand = new DelegateCommand(OnRemoveQuestion);
-
+            OpenPackSettingsCommand = new DelegateCommand(OnOpenPackSettings);
         }
+
 
         public ICommand AddQuestionCommand { get; }
         public ICommand RemoveQuestionCommand { get; }
+        public ICommand OpenPackSettingsCommand { get; }
+            
 
         private void OnAddQuestion(object parameter)
         {
@@ -47,11 +46,12 @@ namespace Labb_3_QuizDataBas.ViewModel
                 RaisePropertyChanged();
             }
         }
+        private void OnOpenPackSettings(object obj)
+        {
 
-
-        //Björn härifrån och nedåt händer mer saker som jag inte riktigt förstår vad dom gör
-
-        //public QuestionPackViewModel? ActivePack { get => mainWindowViewModel?.ActivePack; 
+            PackOptionsDialog packOptions = new PackOptionsDialog();
+            packOptions.Show();
+        }
 
         public string ActivePackName => ActivePack?.Name ?? "No Pack Selected";
         private void ActivePack_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -63,25 +63,12 @@ namespace Labb_3_QuizDataBas.ViewModel
         }
 
         private QuestionPackViewModel? _activepack;
-
         public QuestionPackViewModel? ActivePack
         {
-            get => _activepack;
-            set
-            {
-                if (_activepack != value)
-                {
-                    _activepack = value;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(ActivePackName));
-                }
-            }
+            get => mainWindowViewModel.ActivePack;
         }
-
-        //Björn, Till hit fattar jag inte jättemycket vad saker fyller för funktion!
-
+        
         private Question? _selectedItem;
-
         public Question? SelectedItem
         {
             get => _selectedItem;
@@ -93,7 +80,6 @@ namespace Labb_3_QuizDataBas.ViewModel
         }
 
         private Visibility _visibility;
-
         public Visibility visibility
         {
             get => _visibility;
@@ -104,9 +90,7 @@ namespace Labb_3_QuizDataBas.ViewModel
             }
         }
 
-
         private string _query;
-
         public string Query
         {
             get => SelectedItem?.Query;
@@ -118,7 +102,6 @@ namespace Labb_3_QuizDataBas.ViewModel
         }
 
         private string _correctAnswer;
-
         public string CorrectAnswer
         {
             get => SelectedItem.CorrectAnswer;
@@ -126,7 +109,6 @@ namespace Labb_3_QuizDataBas.ViewModel
             {
                 SelectedItem.CorrectAnswer = value;
                 RaisePropertyChanged();
-
             }
         }
 
@@ -138,7 +120,6 @@ namespace Labb_3_QuizDataBas.ViewModel
             {
                 SelectedItem.IncorrectAnswers[0] = value;
                 RaisePropertyChanged();
-
             }
         }
 
@@ -162,12 +143,7 @@ namespace Labb_3_QuizDataBas.ViewModel
             {
                 SelectedItem.IncorrectAnswers[2] = value;
                 RaisePropertyChanged();
-
-
             }
         }
-
-
-
     }
 }

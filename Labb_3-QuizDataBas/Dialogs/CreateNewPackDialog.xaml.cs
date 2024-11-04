@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Labb_3_QuizDataBas.Model;
+using Labb_3_QuizDataBas.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Labb_3_QuizDataBas.Dialogs
 {
@@ -21,17 +25,9 @@ namespace Labb_3_QuizDataBas.Dialogs
     {
         public CreateNewPackDialog()
         {
+            DataContext = (App.Current.MainWindow as MainWindow).DataContext;
             InitializeComponent();
         }
 
-        private void CreatePackBTN_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CancelBTN_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -1,14 +1,25 @@
 ﻿<Window x:Class="Labb_3_QuizDataBas.Dialogs.PackOptionsDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3_QuizDataBas.Dialogs"
+        xmlns:enumeration="clr-namespace:Labb_3_QuizDataBas.Model"
         mc:Ignorable="d"
         Title="Pack Options"
         Width="250"
         Height="300"
         WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="EnumDataSource"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enumeration:Difficulty" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -35,26 +46,26 @@
                Margin="0,4,0,0"
                Width="104"
                Height="26" />
-        <!-- Björn, jag vill att QuestionPackNameTB kan ändra namnet på en label i ConfigurationView.Xaml-->
+
         <TextBox x:Name="QuestionPackNameTB"
-                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding ActivePack.Name, UpdateSourceTrigger=PropertyChanged}"
                  Height="25"
                  Width="Auto"
                  VerticalAlignment="Top"
                  Margin="5,31,5,0" />
 
         <ComboBox x:Name="DifficultyCB"
+                  ItemsSource="{Binding Source={StaticResource EnumDataSource}}"
+                  Text="{Binding ActivePack.Difficulty}"
                   Height="25"
                   Width="Auto"
                   VerticalAlignment="Top"
                   Grid.Row="1"
                   Margin="5,40,5,0"
-                  SelectedItem="{Binding Difficulty, Mode=TwoWay}"
+                  SelectedItem="{Binding ActivePack.Difficulty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   RenderTransformOrigin="0.5,0.563">
-            <ComboBoxItem Content="Easy" Tag="0" />
-            <ComboBoxItem Content="Medium" Tag="1" />
-            <ComboBoxItem Content="Hard" Tag="2"/>
         </ComboBox>
+
         <TextBox x:Name="TimeLimitLabel"
                  VerticalAlignment="Top"
                  HorizontalAlignment="Left"
@@ -85,7 +96,7 @@
                 IsSnapToTickEnabled="True"
                 TickPlacement="BottomRight"
                 Grid.Row="2"
-                Value="{Binding TimeLimitInSeconds, Mode=TwoWay}"
+                Value="{Binding ActivePack.TimeLimitInSeconds, Mode=TwoWay}"
                 VerticalAlignment="Top"
                 BorderThickness="5"
                 Margin="5,35,5,0"

@@ -20,8 +20,7 @@
                            MinHeight="40" />
         </Grid.RowDefinitions>
         
-        <!--Björn, här är min label!-->
-        <Label Content="{Binding ActivePackName}"
+        <Label Content="{Binding ActivePack.Name}"               
                HorizontalAlignment="Left"
                Margin="10,0,0,0"
                FontSize="20"
@@ -57,7 +56,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
                 Margin="360,0,0,0"
-                Click="PackSettings_Click">
+                Command="{Binding OpenPackSettingsCommand}">
             <Image Source="/Resources/sliders-solid.png" />
         </Button>
 

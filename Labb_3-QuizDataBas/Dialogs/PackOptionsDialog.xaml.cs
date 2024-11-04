@@ -2,6 +2,7 @@
 using Labb_3_QuizDataBas.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,20 +20,22 @@ namespace Labb_3_QuizDataBas.Dialogs
     /// <summary>
     /// Interaction logic for PackOptionsDialog.xaml
     /// </summary>
-    public partial class PackOptionsDialog : Window
+    public partial class PackOptionsDialog : Window, INotifyPropertyChanged
     {
         public QuestionPackViewModel PackViewModel { get; private set; }
 
-        public PackOptionsDialog(QuestionPackViewModel packViewModel)
+        public PackOptionsDialog()
         {
             InitializeComponent();
-            DataContext = packViewModel;
+            DataContext = (App.Current.MainWindow as MainWindow).DataContext;
         }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void CancelChangesBTN_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
-            Close();
+
+            this.Close();
         }
 
         private void SaveSettingsBTN_Click(object sender, RoutedEventArgs e)
@@ -45,6 +48,7 @@ namespace Labb_3_QuizDataBas.Dialogs
             this.DialogResult = true;
             }
             this.Close();
+
         }
     }
 }

@@ -16,7 +16,10 @@
         <Menu>
             <MenuItem Header="_File">
                 <MenuItem Header="_New Question Pack"
-                          Icon="{fa:Icon folderPlus}" />
+                          Icon="{fa:Icon folderPlus}"
+                          Command="{Binding CreateNewPackCommand}"
+                          
+                          />
 
                 <MenuItem Header="_Select Question Pack"
                           Icon="{fa:Icon folderOpen}">
@@ -26,13 +29,13 @@
                     <MenuItem.ItemContainerStyle>
                         <Style TargetType="MenuItem">
                             <Setter Property="Header"
-                                    Value="{Binding Name}" />
+                                    Value="{Binding Name}"/>
                             <Setter Property="Command"
-                                    Value="{Binding DataContet.SetActivePackCommand, 
-                                                    RelativeSource={RelativeSource 
-                                                    AncestorType=Window}}" />
+                                    Value="{Binding DataContext.SaveNewPackCommand, 
+                                    RelativeSource={RelativeSource AncestorType=Window}}" />
                             <Setter Property="CommandParameter"
                                     Value="{Binding}" />
+
                         </Style>
                                
                     </MenuItem.ItemContainerStyle>
@@ -96,7 +99,9 @@
 
                 <Separator />
                 <MenuItem Header="Fullscreen"
-                          Icon="{fa:Icon expand}" />
+                          Icon="{fa:Icon expand}" 
+                          
+                          />
             </MenuItem>
 
         </Menu>
