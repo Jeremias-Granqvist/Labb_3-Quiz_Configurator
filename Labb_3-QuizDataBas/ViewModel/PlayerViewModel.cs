@@ -29,19 +29,7 @@ namespace Labb_3_QuizDataBas.ViewModel
             timer.Tick += Timer_Tick;
             timer.Start();
 
-            UpdateBUttonCommand = new DelegateCommand(UpdateButton, CanUpdateButton);
         }
-
-        private bool CanUpdateButton(object? arg)
-        {
-            return true;
-        }
-
-        private void UpdateButton(object obj)
-        {
-            testData += "x";
-        }
-
         private void Timer_Tick(object? sender, EventArgs e)
         {
             TestData += "x";

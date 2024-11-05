@@ -1,18 +1,52 @@
 ﻿<UserControl x:Class="Labb_3_QuizDataBas.Views.PlayerView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             DataContext="Binding PlayerViewModel"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             DataContext="{Binding PlayerViewModel}"
              xmlns:local="clr-namespace:Labb_3_QuizDataBas.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             d:Background="White" >
     <Grid>
-        <Button Grid.Row="1"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Content="{Binding Path=ActivePack.Name}"
-                Margin="10" />
-                <!-- Command="Binding UpdateButtonCommand" -->
+        <Label x:Name="timerLabel"
+               Content="{Binding timer}"
+               FontSize="40"
+               HorizontalContentAlignment="Center"
+               Width="75"
+               Height="75"
+               Margin="715,11,10,364" />
+        <Label x:Name="NoQuestionsLabel"
+               Content="how many questions?"
+               FontSize="20"
+               HorizontalContentAlignment="Center"
+               Margin="189,10,189,365" />
+        <Label x:Name="ShowQuestionLabel"
+               FontSize="22"
+               Content="this is where my question will show"
+               HorizontalContentAlignment="Center"
+               Margin="189,100,189,225" />
+
+        <Button x:Name="answer1"
+                Content="1 of the answers"
+                Width="200"
+                Height="80"
+                Margin="114,230,486,120" />
+        <Button x:Name="answer2"
+                Content="2 of the answers"
+                Width="200"
+                Height="80"
+                Margin="411,240,189,130" />
+        <Button x:Name="answer3"
+                Content="3 of the answers"
+                Width="200"
+                Height="80"
+                Margin="114,360,486,10" />
+        <Button x:Name="answer4"
+                Content="4 of the answers"
+                Width="200"
+                Height="80"
+                Margin="411,360,189,10" />
     </Grid>
 </UserControl>

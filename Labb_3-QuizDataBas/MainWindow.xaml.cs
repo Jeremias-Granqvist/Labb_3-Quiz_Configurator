@@ -9,6 +9,7 @@ namespace Labb_3_QuizDataBas
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();

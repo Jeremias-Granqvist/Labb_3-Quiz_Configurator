@@ -5,30 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3_QuizDataBas"
         xmlns:views="clr-namespace:Labb_3_QuizDataBas.Views"
+        xmlns:viewer="clr-namespace:Labb_3_QuizDataBas.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="450"
         Width="800">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <DataTemplate x:Key="ConfigViewTemplate">
+            <views:ConfigurationView />
+        </DataTemplate>
+
+        <DataTemplate x:Key="PlayerViewTemplate">
+            <views:PlayerView />
+        </DataTemplate>
+    </Window.Resources>
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <views:MenuView Grid.Row="0" />
-        <views:ConfigurationView Grid.Row="1" />
+
+        <ContentControl Content="{Binding CurrentView}"
+                        Grid.Row="1">
+            <ContentControl.ContentTemplate>
+                <DataTemplate DataType="{x:Type viewer:Visibility}">
+                    <ContentControl Content="{Binding CurrentView}">
+                        <ContentControl.ContentTemplate>
+                            <DataTemplate>
+                                <views:ConfigurationView />
+                            </DataTemplate>
+                        </ContentControl.ContentTemplate>
+                    </ContentControl>
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
+        </ContentControl>
+
+
 
     </Grid>
 </Window>
-<!--under här ska configview eller playerview visas, beroende på vilket läge man är i.-->
-
-
-<!--3 nya UserControls: 
-    MenuView.xaml 
-    (i denna bygger ni programmets huvudmeny), 
-    ConfigurationView.xaml 
-    (denna innehåller de komponenter man ser 
-    när man är i konfigurationsläget (View->Edit)); 
-    PlayerView.xaml 
-    (denna innehåller de komponenter man ser när man är i spelläget (View->Play)).
--->
