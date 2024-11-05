@@ -33,17 +33,6 @@
 
         <ContentControl Content="{Binding CurrentView}"
                         Grid.Row="1">
-            <ContentControl.ContentTemplate>
-                <DataTemplate DataType="{x:Type viewer:Visibility}">
-                    <ContentControl Content="{Binding CurrentView}">
-                        <ContentControl.ContentTemplate>
-                            <DataTemplate>
-                                <views:ConfigurationView />
-                            </DataTemplate>
-                        </ContentControl.ContentTemplate>
-                    </ContentControl>
-                </DataTemplate>
-            </ContentControl.ContentTemplate>
         </ContentControl>
 
 

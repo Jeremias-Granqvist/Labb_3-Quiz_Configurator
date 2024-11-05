@@ -1,4 +1,5 @@
-﻿using Labb_3_QuizDataBas.Dialogs;
+﻿using Labb_3_Quiz_Configurator.Model;
+using Labb_3_QuizDataBas.Dialogs;
 using Labb_3_QuizDataBas.ViewModel;
 using System.Windows.Controls;
 

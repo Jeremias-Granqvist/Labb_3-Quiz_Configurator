@@ -19,6 +19,8 @@ namespace Labb_3_QuizDataBas.Views
             InitializeComponent();
         }
 
+
+
         //private void PackSettings_Click(object sender, RoutedEventArgs e)
         //{
         //    var viewModel = this.DataContext as ConfigurationViewModel;
@@ -30,7 +32,7 @@ namespace Labb_3_QuizDataBas.Views
 
         //        }
         //    }
-            
+
         //}
     }
 }

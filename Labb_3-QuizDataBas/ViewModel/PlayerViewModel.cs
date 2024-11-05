@@ -23,16 +23,17 @@ namespace Labb_3_QuizDataBas.ViewModel
 
         public PlayerViewModel(MainWindowViewModel? mainWindowViewModel)
         {
+            
             this.mainWindowViewModel = mainWindowViewModel;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += Timer_Tick;
+            //timer.Tick += Timer_Tick;
             timer.Start();
 
         }
-        private void Timer_Tick(object? sender, EventArgs e)
-        {
-            TestData += "x";
-        }
+        //private void Timer_Tick(object? sender, EventArgs e)
+        //{
+        //    TestData += "x";
+        //}
     }
 }

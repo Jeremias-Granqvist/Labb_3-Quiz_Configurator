@@ -5,6 +5,7 @@ using Labb_3_QuizDataBas.Model;
 using Labb_3_QuizDataBas.Views;
 using System.Collections.ObjectModel;
 using System.Drawing.Drawing2D;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -44,15 +45,18 @@ namespace Labb_3_QuizDataBas.ViewModel
             Packs.Add(ActivePack);
             PlayerViewModel = new PlayerViewModel(this);
 
-            CurrentView = Visibility.ConfigMode;
+            CurrentView = new ConfigurationView();
 
             CreateNewPackCommand = new DelegateCommand(OnCreateNewPack);
             SaveNewPackCommand = new DelegateCommand(OnSaveNewPack);
 
+            SwitchToPlayerViewCommand = new DelegateCommand(SwitchToPlayerView);
+            SwitchToConfigurationViewCommand = new DelegateCommand(SwitchToConfigurationView);
 
-            PlayCommand = new DelegateCommand(OnPlayCommandExecuted);
             SetFullScreenCommand = new DelegateCommand(OnSetFullScreen);
         }
+
+ 
 
         public ICommand SetFullScreenCommand { get; }
         public ICommand CreateNewPackCommand { get; }
@@ -81,15 +85,17 @@ namespace Labb_3_QuizDataBas.ViewModel
 
         private void OnSetFullScreen(object obj)
         {
-//            FullscreenControls fullscreen = new FullscreenControls();
-
+            if(obj is Window win)
+            {
+                FullscreenControls.Fullscreen(win);
+            }
         }
 
-        private Visibility _currentView;
+        private object _currentView;
 
-        public Visibility CurrentView
+        public object CurrentView
         {
-            get { return _currentView; }
+            get => _currentView;
             set 
             {
                 if (_currentView != value)
@@ -99,19 +105,27 @@ namespace Labb_3_QuizDataBas.ViewModel
                     RaisePropertyChanged("IsConfigViewVisible");
                     RaisePropertyChanged("IsPlayerViewVisible");
                 }
-            
             }
         }
-        public bool IsConfigViewVisible => CurrentView == Visibility.ConfigMode;
-        public bool IsPlayerViewVisible => CurrentView == Visibility.PlayerMode;
+        public Visibility CurrentVisibility { get; set; }
 
-        public bool IsPlayButtonVisible => CurrentView == Visibility.ConfigMode;
+        public bool IsConfigViewVisible => CurrentVisibility == Visibility.ConfigMode;
+        public bool IsPlayerViewVisible => CurrentVisibility == Visibility.PlayerMode;
+
+        public bool IsPlayButtonVisible => CurrentVisibility == Visibility.ConfigMode;
         public ICommand PlayCommand { get; }
 
-        private void OnPlayCommandExecuted(object obj)
+        public ICommand SwitchToConfigurationViewCommand { get; }
+        public ICommand SwitchToPlayerViewCommand { get; }
+
+        private void SwitchToPlayerView(object obj)
         {
-            CurrentView = Visibility.PlayerMode;
-            RaisePropertyChanged("CurrentView");
+            CurrentView = new PlayerView();
+            RaisePropertyChanged();
+        }
+        private void SwitchToConfigurationView(object obj)
+        {
+            CurrentView = new ConfigurationView();
             RaisePropertyChanged();
         }
 

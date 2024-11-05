@@ -92,16 +92,17 @@
             <MenuItem Header="View">
                 <MenuItem Header="Play"
                           Icon="{fa:Icon play}"
-                          Command="{Binding PlayCommand}"
-                          Visibility="{Binding IsPlayButtonVisible}"/>
+                          Command="{Binding SwitchToPlayerViewCommand}"/>
                 
                 <MenuItem Header="Edit"
-                          Icon="{fa:Icon gears}" />
+                          Icon="{fa:Icon gears}"
+                          Command="{Binding SwitchToConfigurationViewCommand}"/>
 
                 <Separator />
                 <MenuItem Header="Fullscreen"
-                          Icon="{fa:Icon expand}" 
-                          
+                          Icon="{fa:Icon expand}"
+                          Command="{Binding SetFullScreenCommand}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                           />
             </MenuItem>
 

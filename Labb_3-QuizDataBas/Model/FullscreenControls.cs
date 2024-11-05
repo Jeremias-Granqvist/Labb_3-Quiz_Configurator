@@ -23,13 +23,22 @@ namespace Labb_3_Quiz_Configurator.Model
         }
         public static void Fullscreen(Window win)
         {
-            if(win.WindowState == WindowState.Normal)
+            if(isFull)
                 {
-                win.WindowState = WindowState.Maximized;
-                }
+                win.WindowState = WindowState.Normal;
+                win.Left = old_loc.X;
+                win.Top = old_loc.Y;
+                win.Width = old_size.Width;
+                win.Height = old_size.Height;
+                isFull = false;
+            }
             else
             {
-                win.WindowState = WindowState.Normal;
+                old_size = new Size(win.Width, win.Height);
+                old_loc = new Point(win.Left, win.Top);
+                win.WindowState = WindowState.Maximized;
+                isFull = true;
+
             }
         }
     }
