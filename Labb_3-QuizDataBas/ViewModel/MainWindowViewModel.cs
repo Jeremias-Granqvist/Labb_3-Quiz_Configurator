@@ -1,4 +1,5 @@
-﻿using Labb_3_Quiz_Configurator.Model;
+﻿using Labb_3_Quiz_Configurator;
+using Labb_3_Quiz_Configurator.Model;
 using Labb_3_QuizDataBas.Command;
 using Labb_3_QuizDataBas.Dialogs;
 using Labb_3_QuizDataBas.Model;
@@ -40,6 +41,9 @@ namespace Labb_3_QuizDataBas.ViewModel
         public MainWindowViewModel()
         {
             Packs = new ObservableCollection<QuestionPackViewModel>();
+
+
+
             ConfigurationViewModel = new ConfigurationViewModel(this);
             ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
             Packs.Add(ActivePack);
@@ -70,7 +74,7 @@ namespace Labb_3_QuizDataBas.ViewModel
             CreateNewPackDialog createNewPack = new CreateNewPackDialog();
             createNewPack.DataContext = this;
             createNewPack.Show();
-            
+
         }
         private void OnSaveNewPack(object obj)
         {
@@ -80,6 +84,9 @@ namespace Labb_3_QuizDataBas.ViewModel
              ActivePack = newPack;
             RaisePropertyChanged("ActivePack");
             createNewPackDialog.Close();
+
+                var manager = new Json();
+                manager.SaveQuestionPack(Packs);
             }
         }
 
@@ -121,6 +128,7 @@ namespace Labb_3_QuizDataBas.ViewModel
         private void SwitchToPlayerView(object obj)
         {
             CurrentView = new PlayerView();
+            PlayerViewModel.StartQuiz(ActivePack.Questions);
             RaisePropertyChanged();
         }
         private void SwitchToConfigurationView(object obj)

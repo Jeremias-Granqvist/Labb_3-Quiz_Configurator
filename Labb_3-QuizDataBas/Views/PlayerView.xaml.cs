@@ -24,10 +24,5 @@ namespace Labb_3_QuizDataBas.Views
         {
             InitializeComponent();
         }
-
-        private void answer4_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

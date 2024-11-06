@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800"
-             d:Background="White" >
+             d:Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -24,7 +24,7 @@
 
         </Grid.RowDefinitions>
         <Label x:Name="timerLabel"
-               Content="{Binding timer}"
+               Content="{Binding Time}"
                FontSize="40"
                HorizontalContentAlignment="Center"
                Grid.Column="3"
@@ -45,35 +45,44 @@
                Margin="10,10,10,10" />
         <Label x:Name="ShowQuestionLabel"
                FontSize="22"
-               Content="this is where my question will show"
+               Content="{Binding DisplayedQuestion.Query}"
                Grid.Column="1"
                Grid.ColumnSpan="2"
                Grid.Row="0"
-               HorizontalAlignment="Stretch"
-               VerticalAlignment="Stretch"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Bottom"
-               Margin="10,10,10,10" />
+               Margin="10,11,10,8" />
 
         <Button x:Name="answer1"
-                Content="1 of the answers"
+                Content="{Binding Answer1, UpdateSourceTrigger=PropertyChanged}"
                 Grid.Column="1"
                 Grid.Row="2"
-                Margin="10,10,10,10" />
+                Margin="10,10,10,10"
+                Command="{Binding SelectedOptionCommand}"
+                CommandParameter="{Binding Answer1}" />
+
         <Button x:Name="answer2"
-                Content="2 of the answers"
+                Content="{Binding Answer2, UpdateSourceTrigger=PropertyChanged}"
                 Grid.Column="2"
-                Grid.Row="2"                
-                Margin="10,10,10,10" />
+                Grid.Row="2"
+                Margin="10,10,10,10"
+                Command="{Binding SelectedOptionCommand}"
+                CommandParameter="{Binding Answer2}" />
+
         <Button x:Name="answer3"
-                Content="3 of the answers"
+                Content="{Binding Answer3, UpdateSourceTrigger=PropertyChanged}"
                 Grid.Column="1"
                 Grid.Row="3"
-                Margin="10,10,10,10" />
+                Margin="10,10,10,10"
+                Command="{Binding SelectedOptionCommand}"
+                CommandParameter="{Binding Answer3}" />
+
         <Button x:Name="answer4"
-                Content="4 of the answers"
+                Content="{Binding Answer4, UpdateSourceTrigger=PropertyChanged}"
                 Grid.Column="2"
                 Grid.Row="3"
-                Margin="10,10,10,10" />
+                Margin="10,10,10,10"
+                Command="{Binding SelectedOptionCommand}"
+                CommandParameter="{Binding Answer4}" />
     </Grid>
 </UserControl>

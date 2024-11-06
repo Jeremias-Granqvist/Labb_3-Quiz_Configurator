@@ -1,4 +1,5 @@
-﻿using Labb_3_QuizDataBas.ViewModel;
+﻿using Labb_3_Quiz_Configurator;
+using Labb_3_QuizDataBas.ViewModel;
 using Labb_3_QuizDataBas.Views;
 using System.Windows;
 
@@ -14,7 +15,8 @@ namespace Labb_3_QuizDataBas
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
-
+            var manager = new Json();
+            manager.LoadQuestionPack();
 
         }
         private void OpenConfigurationView()
