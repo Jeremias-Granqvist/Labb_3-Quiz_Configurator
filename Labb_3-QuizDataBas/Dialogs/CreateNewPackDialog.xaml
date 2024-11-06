@@ -123,7 +123,8 @@
                     Width="50"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Margin="150,0,0,0"/>
+                    Margin="150,0,0,0"
+                    Click="CancelBTN_Click"/>
         </Grid>
     </Grid>
 </Window>

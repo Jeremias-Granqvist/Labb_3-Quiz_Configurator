@@ -44,8 +44,9 @@ namespace Labb_3_QuizDataBas.ViewModel
             ConfigurationViewModel = new ConfigurationViewModel(this);
             ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
             Packs.Add(ActivePack);
+            
             var manager = new Json();
-            manager.SaveQuestionPack(Packs);
+            manager.LoadQuestionPack();
             PlayerViewModel = new PlayerViewModel(this);
 
             CurrentView = new ConfigurationView();

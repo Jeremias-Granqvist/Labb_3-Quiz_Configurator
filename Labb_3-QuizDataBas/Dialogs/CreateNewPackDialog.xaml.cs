@@ -29,5 +29,9 @@ namespace Labb_3_QuizDataBas.Dialogs
             InitializeComponent();
         }
 
+        private void CancelBTN_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

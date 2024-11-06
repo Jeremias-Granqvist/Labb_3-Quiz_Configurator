@@ -13,10 +13,10 @@ namespace Labb_3_QuizDataBas
 
         public MainWindow()
         {
-            InitializeComponent();
-            DataContext = new MainWindowViewModel();
             var manager = new Json();
             manager.LoadQuestionPack();
+            InitializeComponent();
+            DataContext = new MainWindowViewModel();
 
         }
         private void OpenConfigurationView()

@@ -1,4 +1,5 @@
-﻿using Labb_3_QuizDataBas.Command;
+﻿using Labb_3_Quiz_Configurator;
+using Labb_3_QuizDataBas.Command;
 using Labb_3_QuizDataBas.Dialogs;
 using Labb_3_QuizDataBas.Model;
 using System.ComponentModel;
@@ -17,21 +18,19 @@ namespace Labb_3_QuizDataBas.ViewModel
         {
             this.mainWindowViewModel = mainWindowViewModel;
 
-  //          ActivePack.Questions.Add(new Question());
            SelectedItem = ActivePack?.Questions.FirstOrDefault();
 
-            //flytta till mainwindow? 
+
 
             AddQuestionCommand = new DelegateCommand(OnAddQuestion);
             RemoveQuestionCommand = new DelegateCommand(OnRemoveQuestion);
             OpenPackSettingsCommand = new DelegateCommand(OnOpenPackSettings);
         }
 
-
         public ICommand AddQuestionCommand { get; }
         public ICommand RemoveQuestionCommand { get; }
         public ICommand OpenPackSettingsCommand { get; }
-            
+        
 
         private void OnAddQuestion(object parameter)
         {
@@ -52,6 +51,8 @@ namespace Labb_3_QuizDataBas.ViewModel
             PackOptionsDialog packOptions = new PackOptionsDialog();
             packOptions.Show();
         }
+
+
 
         public string ActivePackName => ActivePack?.Name ?? "No Pack Selected";
         private void ActivePack_PropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -1,11 +1,13 @@
 ﻿using Labb_3_QuizDataBas.Model;
 using System.Collections.ObjectModel;
+using System.Text.Json.Serialization;
 
 namespace Labb_3_QuizDataBas.ViewModel
 {
     public class QuestionPackViewModel : ViewModelBase
     {
         private readonly QuestionPack model;
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
         public QuestionPack Model => model;
 
 
@@ -41,7 +43,8 @@ namespace Labb_3_QuizDataBas.ViewModel
 
         public QuestionPackViewModel()
         {
-            
+            model = new QuestionPack(); 
+            Questions = new ObservableCollection<Question>();
         }
         public QuestionPackViewModel(QuestionPack model)
         {

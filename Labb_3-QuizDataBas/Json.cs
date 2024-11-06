@@ -1,17 +1,34 @@
 ﻿using Labb_3_QuizDataBas.Model;
 using Labb_3_QuizDataBas.ViewModel;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Labb_3_Quiz_Configurator
 {
-    public class Json
+    public class Json : INotifyPropertyChanged
     {
-        // använd för att konkatenera /sätta ihop med filePath       Path path
-        // kontrollera att mappen finns och filen finns, annars skapa mapp och skapa fil, kan använda klass "Directory".
         private string filePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
+        private ObservableCollection<QuestionPackViewModel> _packs;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public ObservableCollection<QuestionPackViewModel> Packs
+        {
+            get => _packs;
+            set
+            {
+                _packs = value;
+                RaisePropertyChanged("Packs");
+            }
+        }
         public void SaveQuestionPack(ObservableCollection<QuestionPackViewModel> questionPack)
         {
             string folderName = @"Laboration3";
@@ -20,7 +37,9 @@ namespace Labb_3_Quiz_Configurator
 
             var options = new JsonSerializerOptions
             {
-                WriteIndented = true
+                WriteIndented = true,
+                IgnoreReadOnlyFields = true,
+                IgnoreReadOnlyProperties = true
             };
 
             if (!Directory.Exists(folderPath))
@@ -45,11 +64,18 @@ namespace Labb_3_Quiz_Configurator
 
             if (File.Exists(fullPath))
             {
+                if (new FileInfo(fullPath).Length != 0)
+                {
                 string json = File.ReadAllText(fullPath);
+                var questionPacks = JsonSerializer.Deserialize<ObservableCollection<QuestionPackViewModel>>(json);
+                    Packs = questionPacks ?? new ObservableCollection<QuestionPackViewModel>();
+                return Packs;
 
-                var questionPack = JsonSerializer.Deserialize<ObservableCollection<QuestionPackViewModel>>(json);
-
-                return questionPack;
+                }
+            else
+            {
+                return null;
+            }
             }
             else
             {
