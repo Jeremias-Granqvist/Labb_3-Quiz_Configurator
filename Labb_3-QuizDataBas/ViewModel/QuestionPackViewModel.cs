@@ -6,6 +6,7 @@ namespace Labb_3_QuizDataBas.ViewModel
     public class QuestionPackViewModel : ViewModelBase
     {
         private readonly QuestionPack model;
+        public QuestionPack Model => model;
 
 
         public ObservableCollection<Question> Questions { get;}
@@ -38,8 +39,10 @@ namespace Labb_3_QuizDataBas.ViewModel
             }
         }
 
-        public QuestionPack Model => model;
-
+        public QuestionPackViewModel()
+        {
+            
+        }
         public QuestionPackViewModel(QuestionPack model)
         {
             this.model = model;

@@ -14,7 +14,7 @@ namespace Labb_3_QuizDataBas.Model
         public Difficulty Difficulty { get; set; }
         public int TimeLimitInSeconds { get; set; }
         public List<Question> Questions { get; set; }
-
+        public QuestionPack() { } //for Json purpouses
         public QuestionPack(string name, Difficulty difficulty = Difficulty.Medium, int timeLimitInSeconds = 30)
         {
             Name = name;

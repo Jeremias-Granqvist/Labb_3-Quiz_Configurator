@@ -41,12 +41,11 @@ namespace Labb_3_QuizDataBas.ViewModel
         public MainWindowViewModel()
         {
             Packs = new ObservableCollection<QuestionPackViewModel>();
-
-
-
             ConfigurationViewModel = new ConfigurationViewModel(this);
             ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
             Packs.Add(ActivePack);
+            var manager = new Json();
+            manager.SaveQuestionPack(Packs);
             PlayerViewModel = new PlayerViewModel(this);
 
             CurrentView = new ConfigurationView();
