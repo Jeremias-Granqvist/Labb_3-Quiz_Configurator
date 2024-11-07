@@ -1,11 +1,9 @@
-﻿using Labb_3_QuizDataBas.Model;
-using Labb_3_QuizDataBas.ViewModel;
+﻿using Labb_3_QuizDataBas.ViewModel;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Labb_3_Quiz_Configurator
 {
@@ -52,7 +50,8 @@ namespace Labb_3_Quiz_Configurator
             {
                 File.Create(fullPath);
             }
-            File.WriteAllText(fullPath, json);
+
+            File.WriteAllTextAsync(fullPath, json);
 
         }
 
@@ -66,16 +65,16 @@ namespace Labb_3_Quiz_Configurator
             {
                 if (new FileInfo(fullPath).Length != 0)
                 {
-                string json = File.ReadAllText(fullPath);
-                var questionPacks = JsonSerializer.Deserialize<ObservableCollection<QuestionPackViewModel>>(json);
+                    string json = File.ReadAllText(fullPath);
+                    var questionPacks = JsonSerializer.Deserialize<ObservableCollection<QuestionPackViewModel>>(json);
                     Packs = questionPacks ?? new ObservableCollection<QuestionPackViewModel>();
-                return Packs;
+                    return Packs;
 
                 }
-            else
-            {
-                return null;
-            }
+                else
+                {
+                    return null;
+                }
             }
             else
             {

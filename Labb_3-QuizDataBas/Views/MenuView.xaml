@@ -10,7 +10,6 @@
              d:DesignWidth="800">
     <!--Icon = "{fa:Icon namnpåknapppåFontAwesome}" för att byta ikon på knappar sen-->
     <Grid>
-
         <Menu>
             <MenuItem Header="_File">
                 <MenuItem Header="_New Question Pack"
@@ -39,7 +38,7 @@
                     </MenuItem.ItemContainerStyle>
                 </MenuItem>
 
-                <MenuItem Header="Delete Question Pack"
+                <MenuItem Header="_Delete Question Pack"
                           Icon="{fa:Icon folderMinus}" />
 
                 <Separator />
@@ -52,54 +51,30 @@
                           Icon="{fa:Icon doorOpen}" />
 
             </MenuItem>
-            <!--<MenuItem>
-                            <MenuItem Header="_Select Question Pack">
-                                Icon="{fa:Icon FolderOpen}" 
-                                
-                                
-                                <MenuItem.ItemsSource>
-                                    <Binding Path="Packs" />
-                                </MenuItem.ItemsSource>
-                                <MenuItem.ItemContainerStyle>
-                                    <Style TargetType="MenuItem">
-                                        <Setter Property="Header"
-                                                Value="{Binding Name}" />
-                                        <Setter Property="Command"
-                                                Value="{Binding DataContext.SetActivePackCommand, RelativeSource={RelativeSource AncestorType=Window}}" />
-                                        <Setter Property="CommandParameter"
-                                                Value="{Binding}" />
-                                    </Style>
-                                </MenuItem.ItemContainerStyle>
-                            </MenuItem>
-
-                        </Grid>
-                    </MenuItem.Header>
-                </MenuItem>-->
-
-
 
             <MenuItem Header="_Edit">
                 <MenuItem Header="Add Question"
-                          Icon="{fa:Icon plus}" />
+                          Icon="{fa:Icon plus}"
+                          Command="{Binding AddQuestionCommand}" />
 
-                <MenuItem Header="Remove Question"
-                          Icon="{fa:Icon minus}" />
+                <MenuItem Header="_Remove Question"
+                          Icon="{fa:Icon minus}"/>
 
-                <MenuItem Header="Pack Options"
+                <MenuItem Header="Pack _Options"
                           Icon="{fa:Icon sliders}" />
             </MenuItem>
 
-            <MenuItem Header="View">
-                <MenuItem Header="Play"
+            <MenuItem Header="_View">
+                <MenuItem Header="_Play"
                           Icon="{fa:Icon play}"
                           Command="{Binding SwitchToPlayerViewCommand}"/>
                 
-                <MenuItem Header="Edit"
+                <MenuItem Header="Edi_t"
                           Icon="{fa:Icon gears}"
                           Command="{Binding SwitchToConfigurationViewCommand}"/>
 
                 <Separator />
-                <MenuItem Header="Fullscreen"
+                <MenuItem Header="_Fullscreen"
                           Icon="{fa:Icon expand}"
                           Command="{Binding SetFullScreenCommand}"
                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"

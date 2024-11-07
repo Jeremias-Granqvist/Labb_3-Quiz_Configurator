@@ -42,11 +42,18 @@ namespace Labb_3_QuizDataBas.ViewModel
         {
             Packs = new ObservableCollection<QuestionPackViewModel>();
             ConfigurationViewModel = new ConfigurationViewModel(this);
+            var manager = new Json();
+            Packs = manager.LoadQuestionPack();
+            if (Packs == null)
+            {
             ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
             Packs.Add(ActivePack);
-            
-            var manager = new Json();
-            manager.LoadQuestionPack();
+
+            }
+            else
+            {
+                ActivePack = Packs[0];
+            }
             PlayerViewModel = new PlayerViewModel(this);
 
             CurrentView = new ConfigurationView();
@@ -58,13 +65,20 @@ namespace Labb_3_QuizDataBas.ViewModel
             SwitchToConfigurationViewCommand = new DelegateCommand(SwitchToConfigurationView);
 
             SetFullScreenCommand = new DelegateCommand(OnSetFullScreen);
+            AddQuestionCommand = new DelegateCommand(OnAddQuestion);
+            WindowClosingCommand = new DelegateCommand(OnWindowClosing);
         }
-
- 
 
         public ICommand SetFullScreenCommand { get; }
         public ICommand CreateNewPackCommand { get; }
         public ICommand SaveNewPackCommand { get; }
+        public ICommand AddQuestionCommand { get; }
+        private void OnAddQuestion(object parameter)
+        {
+            ActivePack.Questions.Add(new Question());
+            RaisePropertyChanged();
+        }
+
 
         private void OnCreateNewPack(object obj)
         {
@@ -124,6 +138,7 @@ namespace Labb_3_QuizDataBas.ViewModel
 
         public ICommand SwitchToConfigurationViewCommand { get; }
         public ICommand SwitchToPlayerViewCommand { get; }
+        public ICommand WindowClosingCommand { get; }
 
         private void SwitchToPlayerView(object obj)
         {
@@ -145,6 +160,13 @@ namespace Labb_3_QuizDataBas.ViewModel
             get { return _newPack; }
             set { _newPack = value; }
         }
+        private void OnWindowClosing(object obj)
+        {
+                var manager = new Json();
+                manager.SaveQuestionPack(Packs);
+        }
+
+
 
     }
 }

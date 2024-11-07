@@ -1,4 +1,5 @@
-﻿using Labb_3_QuizDataBas.Command;
+﻿using Labb_3_Quiz_Configurator.Dialogs;
+using Labb_3_QuizDataBas.Command;
 using Labb_3_QuizDataBas.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -26,7 +27,11 @@ namespace Labb_3_QuizDataBas.ViewModel
         }
 
         public int CurrentQuestionNumber { get; set; }
+        public int TotalQuestionsNumber { get; set; }
+        public int CorrectNumberOfQuestions { get; set; }
         public Question DisplayedQuestion { get; set; }
+
+
 
 
         private ObservableCollection<string> _allAnswers = new ObservableCollection<string>();
@@ -60,6 +65,54 @@ namespace Labb_3_QuizDataBas.ViewModel
         public string Answer4 => AllAnswers.Count > 3 ? AllAnswers[3] : string.Empty;
 
 
+        private System.Windows.Media.Brush _answer1Color;
+        public System.Windows.Media.Brush Answer1Color
+        {
+            get => _answer1Color;
+            set
+            {
+                _answer1Color = value;
+                RaisePropertyChanged(nameof(Answer1Color));
+            }
+        }
+
+        private System.Windows.Media.Brush _answer2Color;
+        public System.Windows.Media.Brush Answer2Color
+        {
+            get => _answer2Color;
+            set
+            {
+                _answer2Color = value;
+                RaisePropertyChanged(nameof(Answer2Color));
+            }
+        }
+
+        private System.Windows.Media.Brush _answer3Color;
+        public System.Windows.Media.Brush Answer3Color
+        {
+            get => _answer3Color;
+            set
+            {
+                _answer3Color = value;
+                RaisePropertyChanged(nameof(Answer3Color));
+            }
+        }
+
+        private System.Windows.Media.Brush _answer4Color;
+        public System.Windows.Media.Brush Answer4Color
+        {
+            get => _answer4Color;
+            set
+            {
+                _answer4Color = value;
+                RaisePropertyChanged(nameof(Answer4Color));
+            }
+        }
+
+
+
+
+
         public PlayerViewModel(MainWindowViewModel? mainWindowViewModel)
         {
             
@@ -74,20 +127,77 @@ namespace Labb_3_QuizDataBas.ViewModel
             SelectedOptionCommand = new DelegateCommand(SelectedAnswer);
         }
 
-        private void SelectedAnswer(object obj)
+        private string _feedbackMessage;
+        public string FeedbackMessage
         {
-            
-            if (obj.ToString() == DisplayedQuestion.CorrectAnswer.ToString())
+            get => _feedbackMessage;
+            set
             {
-
+                _feedbackMessage = value;
+                RaisePropertyChanged("FeedbackMessage");
             }
         }
 
+        private System.Windows.Media.Brush _feedbackMessageColor;
+        public System.Windows.Media.Brush FeedbackMessageColor
+        {
+            get => _feedbackMessageColor;
+            set
+            {
+                _feedbackMessageColor = value;
+                RaisePropertyChanged("FeedbackMessageColor");
+            }
+        }
+
+        private void SelectedAnswer(object obj)
+        {
+            ObservableCollection<Question> questionlistcopy = QuestionListCopy;
+
+            if (obj.ToString() == DisplayedQuestion.CorrectAnswer.ToString())
+            {
+                FeedbackMessage = "Correct";
+                FeedbackMessageColor = System.Windows.Media.Brushes.Green;
+                CorrectNumberOfQuestions++;
+
+                Answer1Color = (obj.ToString() == Answer1) ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red;
+                Answer2Color = (obj.ToString() == Answer2) ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red;
+                Answer3Color = (obj.ToString() == Answer3) ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red;
+                Answer4Color = (obj.ToString() == Answer4) ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red;
+            }
+            else
+            {
+                FeedbackMessage = $"Incorrect, correct answer is {DisplayedQuestion.CorrectAnswer}";
+                FeedbackMessageColor = System.Windows.Media.Brushes.Red;
+                Answer1Color = (Answer1 == DisplayedQuestion.CorrectAnswer.ToString()) ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red;
+                Answer2Color = (Answer2 == DisplayedQuestion.CorrectAnswer.ToString()) ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red;
+                Answer3Color = (Answer3 == DisplayedQuestion.CorrectAnswer.ToString()) ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red;
+                Answer4Color = (Answer4 == DisplayedQuestion.CorrectAnswer.ToString()) ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red;
+            }
+            timer.Stop();
+            DispatcherTimer nextQuestionTimer = new DispatcherTimer();
+            nextQuestionTimer.Interval = TimeSpan.FromSeconds(2);
+
+
+            nextQuestionTimer.Tick += (sender, e) =>
+            {
+                nextQuestionTimer.Stop();
+                CurrentQuestionNumber++;
+                Time = mainWindowViewModel.ActivePack.TimeLimitInSeconds;
+                ResetButtonColors();
+                QuizRunning(questionlistcopy); // Call QuizRunning with your questions list
+            };
+            nextQuestionTimer.Start();
+        }
+
+
         public ICommand SelectedOptionCommand { get; private set; }
 
-        public void CheckAnswer(object obj, Question question)
+        public void ResetButtonColors()
         {
-            //kanske behöver den här metoden? är inte helt säker...
+            Answer1Color = System.Windows.Media.Brushes.Transparent;
+            Answer2Color = System.Windows.Media.Brushes.Transparent;
+            Answer3Color = System.Windows.Media.Brushes.Transparent;
+            Answer4Color = System.Windows.Media.Brushes.Transparent;
         }
 
         private void TimerTicking(object sender, EventArgs e)
@@ -97,25 +207,60 @@ namespace Labb_3_QuizDataBas.ViewModel
             if (Time == 0)
             {
                 timer.Stop();
+                CurrentQuestionNumber++;
+                QuizRunning(QuestionListCopy);
             }
         }
-
+        ObservableCollection<Question> QuestionListCopy = new ObservableCollection<Question>();
         public void StartQuiz(ObservableCollection<Question> questionList)
         {
-            ObservableCollection<Question> QuestionListCopy = questionList;
-
-
+            QuestionListCopy = questionList;
+            TotalQuestionsNumber = QuestionListCopy.Count;
+            CurrentQuestionNumber = 0;
             Shuffle(QuestionListCopy);
-            if (CurrentQuestionNumber <= QuestionListCopy.Count)
+            QuizRunning(QuestionListCopy);
+        }
+        public void QuizRunning(ObservableCollection<Question> questionList)
+        {
+
+            if (CurrentQuestionNumber < TotalQuestionsNumber)
             {
-            QuizLoop(QuestionListCopy[CurrentQuestionNumber]);
-            timer.Start();
+                QuizLoop(questionList, questionList[CurrentQuestionNumber]);
+                timer.Start();
             }
-            if (CurrentQuestionNumber > QuestionListCopy.Count)
+            else if (CurrentQuestionNumber >= TotalQuestionsNumber)
             {
-                //här ska vi breaka till resultscreen.
+                PreCheck(questionList);
             }
         }
+
+        public void QuizLoop(ObservableCollection<Question> questionList, Question question)
+        {
+            ShuffleAnswers(question);
+            
+            DisplayedQuestion = question;
+            RaisePropertyChanged("CurrentQuestion");
+            RaisePropertyChanged("DisplayedQuestion");
+        }
+
+        //CurrentQuestionNumber++;
+        //    PreCheck(questionList);
+
+        public void PreCheck(ObservableCollection<Question> questionList)
+        {
+            if (CurrentQuestionNumber < TotalQuestionsNumber)
+            {
+                QuizRunning(questionList);
+            }
+            else
+            {
+                Resultdialog resultDialog = new Resultdialog(CorrectNumberOfQuestions, TotalQuestionsNumber);
+                resultDialog.ShowDialog();
+            }
+        }
+
+
+
         //startar
         //shufflar frågor
         //quizloop på frågan som stämmer med index för currentquesitonnumber.
@@ -125,16 +270,10 @@ namespace Labb_3_QuizDataBas.ViewModel
         //starta timer.
 
 
-        public void QuizLoop(Question question)
-        {
-            ShuffleAnswers(question);
-            
-            DisplayedQuestion = question;
-            CurrentQuestionNumber++;
-            RaisePropertyChanged("CurrentQuestion");
-        }
-        //tryck play, shuffla frågor, shuffla svar, visa första frågan.
-        //när användare tryckt på svar, shuffla svar för fråga 2, visa fråga 2.
+
+
+
+
 
         public ObservableCollection<string> ShuffleAnswers(Question question)
         {

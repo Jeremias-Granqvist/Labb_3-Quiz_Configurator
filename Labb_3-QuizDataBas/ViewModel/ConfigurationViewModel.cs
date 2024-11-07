@@ -30,7 +30,6 @@ namespace Labb_3_QuizDataBas.ViewModel
         public ICommand AddQuestionCommand { get; }
         public ICommand RemoveQuestionCommand { get; }
         public ICommand OpenPackSettingsCommand { get; }
-        
 
         private void OnAddQuestion(object parameter)
         {

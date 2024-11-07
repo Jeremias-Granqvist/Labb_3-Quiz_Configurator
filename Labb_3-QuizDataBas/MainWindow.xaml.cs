@@ -1,7 +1,9 @@
 ﻿using Labb_3_Quiz_Configurator;
 using Labb_3_QuizDataBas.ViewModel;
 using Labb_3_QuizDataBas.Views;
+using System.Collections.ObjectModel;
 using System.Windows;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Labb_3_QuizDataBas
 {
@@ -17,7 +19,7 @@ namespace Labb_3_QuizDataBas
             manager.LoadQuestionPack();
             InitializeComponent();
             DataContext = new MainWindowViewModel();
-
+            
         }
         private void OpenConfigurationView()
         {
@@ -28,6 +30,15 @@ namespace Labb_3_QuizDataBas
                 DataContext = mainViewModel?.ConfigurationViewModel 
             };
 
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var viewModel = (MainWindowViewModel)this.DataContext;
+            if (viewModel.WindowClosingCommand.CanExecute(null))
+            {
+                viewModel.WindowClosingCommand.Execute(null); 
+            }
         }
     }
 }

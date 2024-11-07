@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3_QuizDataBas"
         xmlns:views="clr-namespace:Labb_3_QuizDataBas.Views"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:viewer="clr-namespace:Labb_3_QuizDataBas.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="450"
-        Width="800">
+        Width="800"
+        Closing="Window_Closing">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
@@ -20,8 +22,9 @@
         <DataTemplate x:Key="PlayerViewTemplate">
             <views:PlayerView />
         </DataTemplate>
-    </Window.Resources>
 
+
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
