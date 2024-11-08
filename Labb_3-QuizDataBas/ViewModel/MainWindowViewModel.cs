@@ -42,18 +42,7 @@ namespace Labb_3_QuizDataBas.ViewModel
         {
             Packs = new ObservableCollection<QuestionPackViewModel>();
             ConfigurationViewModel = new ConfigurationViewModel(this);
-            var manager = new Json();
-            Packs = manager.LoadQuestionPack();
-            if (Packs == null)
-            {
-            ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
-            Packs.Add(ActivePack);
-
-            }
-            else
-            {
-                ActivePack = Packs[0];
-            }
+            
             PlayerViewModel = new PlayerViewModel(this);
 
             CurrentView = new ConfigurationView();
@@ -78,7 +67,22 @@ namespace Labb_3_QuizDataBas.ViewModel
             ActivePack.Questions.Add(new Question());
             RaisePropertyChanged();
         }
-
+        public async Task LoadPacks()
+        {
+            var manager = new Json();
+            Packs = await manager.LoadQuestionPack();
+            
+            if (Packs == null)
+            {
+                ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
+                Packs.Add(ActivePack);
+            }
+            else
+            {
+                ActivePack = Packs[0];
+                
+            }
+        }
 
         private void OnCreateNewPack(object obj)
         {
@@ -142,6 +146,7 @@ namespace Labb_3_QuizDataBas.ViewModel
 
         private void SwitchToPlayerView(object obj)
         {
+
             CurrentView = new PlayerView();
             PlayerViewModel.StartQuiz(ActivePack.Questions);
             RaisePropertyChanged();
@@ -160,7 +165,7 @@ namespace Labb_3_QuizDataBas.ViewModel
             get { return _newPack; }
             set { _newPack = value; }
         }
-        private void OnWindowClosing(object obj)
+        public void OnWindowClosing(object obj)
         {
                 var manager = new Json();
                 manager.SaveQuestionPack(Packs);

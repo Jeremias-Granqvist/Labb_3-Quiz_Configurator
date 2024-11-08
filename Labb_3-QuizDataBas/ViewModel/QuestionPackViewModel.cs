@@ -6,12 +6,13 @@ namespace Labb_3_QuizDataBas.ViewModel
 {
     public class QuestionPackViewModel : ViewModelBase
     {
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
         private readonly QuestionPack model;
         [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
         public QuestionPack Model => model;
 
 
-        public ObservableCollection<Question> Questions { get;}
+        public ObservableCollection<Question> Questions { get; set; }
 
         public string Name
         {
@@ -43,8 +44,11 @@ namespace Labb_3_QuizDataBas.ViewModel
 
         public QuestionPackViewModel()
         {
-            model = new QuestionPack(); 
-            Questions = new ObservableCollection<Question>();
+            model = new QuestionPack();
+            if (Questions == null)
+            {
+                Questions = new ObservableCollection<Question>(model.Questions ?? Enumerable.Empty<Question>());
+            }
         }
         public QuestionPackViewModel(QuestionPack model)
         {

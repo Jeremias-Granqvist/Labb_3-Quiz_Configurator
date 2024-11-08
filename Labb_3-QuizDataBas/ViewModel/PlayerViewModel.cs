@@ -118,7 +118,6 @@ namespace Labb_3_QuizDataBas.ViewModel
             
             this.mainWindowViewModel = mainWindowViewModel;
 
-            Time = mainWindowViewModel.ActivePack.TimeLimitInSeconds;
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -214,6 +213,7 @@ namespace Labb_3_QuizDataBas.ViewModel
         ObservableCollection<Question> QuestionListCopy = new ObservableCollection<Question>();
         public void StartQuiz(ObservableCollection<Question> questionList)
         {
+            Time = mainWindowViewModel.ActivePack.TimeLimitInSeconds;
             QuestionListCopy = questionList;
             TotalQuestionsNumber = QuestionListCopy.Count;
             CurrentQuestionNumber = 0;

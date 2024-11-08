@@ -1,4 +1,5 @@
-﻿using Labb_3_QuizDataBas.ViewModel;
+﻿using Labb_3_QuizDataBas.Model;
+using Labb_3_QuizDataBas.ViewModel;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -27,7 +28,16 @@ namespace Labb_3_Quiz_Configurator
                 RaisePropertyChanged("Packs");
             }
         }
-        public void SaveQuestionPack(ObservableCollection<QuestionPackViewModel> questionPack)
+        private QuestionPack QuestionPack;
+
+        public QuestionPack _questionPack
+        {
+            get { return QuestionPack; }
+            set { QuestionPack = value; }
+        }
+
+
+        public async void SaveQuestionPack(ObservableCollection<QuestionPackViewModel> questionPack)
         {
             string folderName = @"Laboration3";
             string folderPath = Path.Combine(filePath, folderName);
@@ -51,11 +61,11 @@ namespace Labb_3_Quiz_Configurator
                 File.Create(fullPath);
             }
 
-            File.WriteAllTextAsync(fullPath, json);
+            await File.WriteAllTextAsync(fullPath, json);
 
         }
 
-        public ObservableCollection<QuestionPackViewModel> LoadQuestionPack()
+        public async Task<ObservableCollection<QuestionPackViewModel>> LoadQuestionPack()
         {
             string folderName = @"Laboration3";
             string folderPath = Path.Combine(filePath, folderName);
@@ -65,11 +75,11 @@ namespace Labb_3_Quiz_Configurator
             {
                 if (new FileInfo(fullPath).Length != 0)
                 {
-                    string json = File.ReadAllText(fullPath);
-                    var questionPacks = JsonSerializer.Deserialize<ObservableCollection<QuestionPackViewModel>>(json);
-                    Packs = questionPacks ?? new ObservableCollection<QuestionPackViewModel>();
-                    return Packs;
-
+                    string json = await File.ReadAllTextAsync(fullPath);
+                    var qPack = JsonSerializer.Deserialize<ObservableCollection<QuestionPackViewModel>>(json);
+  //                  Packs = new ObservableCollection<QuestionPackViewModel>();
+                    return qPack;
+                    //returna qPack istället
                 }
                 else
                 {
@@ -78,7 +88,9 @@ namespace Labb_3_Quiz_Configurator
             }
             else
             {
-                return null;
+                Packs = new ObservableCollection<QuestionPackViewModel>();
+                
+                return Packs;
             }
         }
     }

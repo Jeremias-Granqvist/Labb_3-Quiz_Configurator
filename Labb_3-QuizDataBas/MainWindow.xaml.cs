@@ -12,13 +12,23 @@ namespace Labb_3_QuizDataBas
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private MainWindowViewModel mainWindowViewModel;
         public MainWindow()
         {
-            var manager = new Json();
-            manager.LoadQuestionPack();
+
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            DataContext = mainWindowViewModel = new MainWindowViewModel();
+            Loaded += MainWindow_Loaded;
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadData();
+        }
+
+        private async Task LoadData()
+        {
+            await mainWindowViewModel.LoadPacks();
             
         }
         private void OpenConfigurationView()
@@ -35,6 +45,8 @@ namespace Labb_3_QuizDataBas
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var viewModel = (MainWindowViewModel)this.DataContext;
+            viewModel.OnWindowClosing(this);
+
             if (viewModel.WindowClosingCommand.CanExecute(null))
             {
                 viewModel.WindowClosingCommand.Execute(null); 

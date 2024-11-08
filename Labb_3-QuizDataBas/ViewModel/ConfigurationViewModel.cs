@@ -2,6 +2,7 @@
 using Labb_3_QuizDataBas.Command;
 using Labb_3_QuizDataBas.Dialogs;
 using Labb_3_QuizDataBas.Model;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -14,13 +15,12 @@ namespace Labb_3_QuizDataBas.ViewModel
 
         private QuestionPackViewModel? _mainWindowViewModel;
 
+
         public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel)
         {
             this.mainWindowViewModel = mainWindowViewModel;
 
            SelectedItem = ActivePack?.Questions.FirstOrDefault();
-
-
 
             AddQuestionCommand = new DelegateCommand(OnAddQuestion);
             RemoveQuestionCommand = new DelegateCommand(OnRemoveQuestion);
@@ -35,6 +35,9 @@ namespace Labb_3_QuizDataBas.ViewModel
         {
             ActivePack.Questions.Add(new Question());
             RaisePropertyChanged();
+            var manager = new Json();
+            manager.SaveQuestionPack(mainWindowViewModel.Packs);
+
         }
         private void OnRemoveQuestion(object parameter)
         {
@@ -98,6 +101,8 @@ namespace Labb_3_QuizDataBas.ViewModel
             {
                 SelectedItem.Query = value;
                 RaisePropertyChanged();
+                var manager = new Json();
+                manager.SaveQuestionPack(mainWindowViewModel.Packs);
             }
         }
 
@@ -108,7 +113,9 @@ namespace Labb_3_QuizDataBas.ViewModel
             set
             {
                 SelectedItem.CorrectAnswer = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged(); 
+                var manager = new Json();
+                manager.SaveQuestionPack(mainWindowViewModel.Packs);
             }
         }
 
@@ -120,6 +127,8 @@ namespace Labb_3_QuizDataBas.ViewModel
             {
                 SelectedItem.IncorrectAnswers[0] = value;
                 RaisePropertyChanged();
+                var manager = new Json();
+                manager.SaveQuestionPack(mainWindowViewModel.Packs);
             }
         }
 
@@ -132,6 +141,8 @@ namespace Labb_3_QuizDataBas.ViewModel
             {
                 SelectedItem.IncorrectAnswers[1] = value;
                 RaisePropertyChanged();
+                var manager = new Json();
+                manager.SaveQuestionPack(mainWindowViewModel.Packs);
             }
         }
 
@@ -143,6 +154,8 @@ namespace Labb_3_QuizDataBas.ViewModel
             {
                 SelectedItem.IncorrectAnswers[2] = value;
                 RaisePropertyChanged();
+                var manager = new Json();
+                manager.SaveQuestionPack(mainWindowViewModel.Packs);
             }
         }
     }
