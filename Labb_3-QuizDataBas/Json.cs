@@ -48,15 +48,18 @@ namespace Labb_3_Quiz_Configurator
                 {
                     string json = await File.ReadAllTextAsync(fullPath);
                     var qPack = JsonSerializer.Deserialize<ObservableCollection<QuestionPackViewModel>>(json);
+                    await Task.Delay(1000);
                     return qPack;
                 }
                 else
                 {
+                    await Task.Delay(1000);
                     return new ObservableCollection<QuestionPackViewModel>();
                 }
             }
             else
             {
+                await Task.Delay(1000);
                 return new ObservableCollection<QuestionPackViewModel>();
             }
         }

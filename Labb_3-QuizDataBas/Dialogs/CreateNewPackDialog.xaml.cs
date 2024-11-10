@@ -33,5 +33,10 @@ namespace Labb_3_QuizDataBas.Dialogs
         {
             Close();
         }
+
+        private void NewTimeLimitSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }

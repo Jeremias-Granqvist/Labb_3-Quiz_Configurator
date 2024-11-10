@@ -10,7 +10,6 @@
         Width="250"
         Height="300"
         Title="CreateNewPackDialog"
-        SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ObjectDataProvider x:Key="EnumDataSource"
@@ -75,7 +74,7 @@
                      BorderThickness="0"
                      HorizontalContentAlignment="Right"
                      VerticalContentAlignment="Center"
-                     Text="{Binding Path=Value, ElementName=NewTimeLimitSlider, Mode=TwoWay}"
+                 Text="{Binding Path=Value, ElementName=NewTimeLimitSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Row="2"
                      Margin="109,5,0,0" />
 
@@ -97,7 +96,8 @@
                     IsSnapToTickEnabled="True"
                     TickPlacement="BottomRight"
                     Grid.Row="2"
-                    Value="{Binding newPack.TimeLimitInSeconds, Mode=TwoWay}"
+                    
+                    Value="{Binding newPack.TimeLimitInSeconds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     VerticalAlignment="Top"
                     BorderThickness="5"
                     Margin="5,35,5,0"

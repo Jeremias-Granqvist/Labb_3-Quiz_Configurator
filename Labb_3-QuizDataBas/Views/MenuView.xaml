@@ -5,25 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:Labb_3_QuizDataBas.Views"
+             xmlns:viewmodel="clr-namespace:Labb_3_QuizDataBas.ViewModel"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
-    <!--Icon = "{fa:Icon namnpåknapppåFontAwesome}" för att byta ikon på knappar sen-->
     <Grid>
         <Menu>
             <MenuItem Header="_File">
                 <MenuItem Header="_New Question Pack"
                           Icon="{fa:Icon folderPlus}"
-                          Command="{Binding CreateNewPackCommand}"
-                          
-                          />
+                          Command="{Binding CreateNewPackCommand}" />
 
                 <MenuItem Header="_Select Question Pack"
                           Icon="{fa:Icon folderOpen}">
                     <MenuItem.ItemsSource>
                         <Binding Path="Packs" />
                     </MenuItem.ItemsSource>
-                    <MenuItem.ItemContainerStyle>
+                    <MenuItem.ItemTemplate>
+                        <DataTemplate>
+                            <MenuItem Header="{Binding Name}"
+                                      Command="{Binding DataContext.SelectPackCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                      CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </MenuItem.ItemTemplate>
+                    <!--<MenuItem.ItemContainerStyle>
                         <Style TargetType="MenuItem">
                             <Setter Property="Header"
                                     Value="{Binding Name}"/>
@@ -35,7 +40,7 @@
 
                         </Style>
                                
-                    </MenuItem.ItemContainerStyle>
+                    </MenuItem.ItemContainerStyle>-->
                 </MenuItem>
 
                 <MenuItem Header="_Delete Question Pack"
@@ -48,7 +53,8 @@
                 <Separator />
 
                 <MenuItem Header="E_xit"
-                          Icon="{fa:Icon doorOpen}" />
+                          Icon="{fa:Icon doorOpen}"
+                          Command="{Binding WindowClosingCommand}"/>
 
             </MenuItem>
 
@@ -58,7 +64,7 @@
                           Command="{Binding AddQuestionCommand}" />
 
                 <MenuItem Header="_Remove Question"
-                          Icon="{fa:Icon minus}"/>
+                          Icon="{fa:Icon minus}" />
 
                 <MenuItem Header="Pack _Options"
                           Icon="{fa:Icon sliders}" />
@@ -67,26 +73,18 @@
             <MenuItem Header="_View">
                 <MenuItem Header="_Play"
                           Icon="{fa:Icon play}"
-                          Command="{Binding SwitchToPlayerViewCommand}"/>
-                
+                          Command="{Binding SwitchToPlayerViewCommand}" />
+
                 <MenuItem Header="Edi_t"
                           Icon="{fa:Icon gears}"
-                          Command="{Binding SwitchToConfigurationViewCommand}"/>
+                          Command="{Binding SwitchToConfigurationViewCommand}" />
 
                 <Separator />
                 <MenuItem Header="_Fullscreen"
                           Icon="{fa:Icon expand}"
                           Command="{Binding SetFullScreenCommand}"
-                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                          />
+                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
             </MenuItem>
-
         </Menu>
-        <!--
-        MainWindow.xaml kommer i princip bestå av ovanstående kontroller på såvis att MenuView alltid kommer visas högst upp, 
-        och ConfigurationView ELLER PlayerView visas i resten av fönstret, beroende på vilket läge man är i. 
-        (För tillfället kan bara kommentera ut den ena eller andra för att testa hur det kommer se ut i respektive läge).
-
--->
     </Grid>
 </UserControl>

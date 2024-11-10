@@ -35,6 +35,8 @@ namespace Labb_3_QuizDataBas.ViewModel
             {
                 _activePack = value;
                 RaisePropertyChanged();
+                var manager = new Json();
+                manager.SaveQuestionPack(Packs);
                 ConfigurationViewModel.RaisePropertyChanged("ActivePack");
             }
         }
@@ -49,6 +51,7 @@ namespace Labb_3_QuizDataBas.ViewModel
 
             CreateNewPackCommand = new DelegateCommand(OnCreateNewPack);
             SaveNewPackCommand = new DelegateCommand(OnSaveNewPack);
+            SelectPackCommand = new DelegateCommand(OnSelectPack);
 
             SwitchToPlayerViewCommand = new DelegateCommand(SwitchToPlayerView);
             SwitchToConfigurationViewCommand = new DelegateCommand(SwitchToConfigurationView);
@@ -57,7 +60,7 @@ namespace Labb_3_QuizDataBas.ViewModel
             AddQuestionCommand = new DelegateCommand(OnAddQuestion);
             WindowClosingCommand = new DelegateCommand(OnWindowClosing);
         }
-
+        public ICommand SelectPackCommand { get; }
         public ICommand SetFullScreenCommand { get; }
         public ICommand CreateNewPackCommand { get; }
         public ICommand SaveNewPackCommand { get; }
@@ -71,15 +74,16 @@ namespace Labb_3_QuizDataBas.ViewModel
         {
             var manager = new Json();
             Packs = await manager.LoadQuestionPack();
-            
+            RaisePropertyChanged("Packs");
             if (Packs == null)
             {
                 ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
                 Packs.Add(ActivePack);
+
             }
             else
             {
-                ActivePack = Packs[0];
+                ActivePack = Packs.FirstOrDefault();
                 
             }
         }
@@ -94,6 +98,11 @@ namespace Labb_3_QuizDataBas.ViewModel
             createNewPack.Show();
 
         }
+        private void OnSelectPack(object obj)
+        {
+            ActivePack = (QuestionPackViewModel)obj;
+            RaisePropertyChanged("ActivePack");
+       }
         private void OnSaveNewPack(object obj)
         {
             if (obj is CreateNewPackDialog createNewPackDialog)
@@ -169,6 +178,7 @@ namespace Labb_3_QuizDataBas.ViewModel
         {
                 var manager = new Json();
                 manager.SaveQuestionPack(Packs);
+            App.Current.Shutdown();
         }
 
 
